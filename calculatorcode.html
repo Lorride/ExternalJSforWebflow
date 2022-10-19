@@ -61,6 +61,22 @@ document.getElementById("Differensiert_eiendomsskatt_eiendomsskatt1").value = 28
 document.getElementById("Differensiert_eiendomsskatt_eiendomsskatt2").value = 140000;
 document.getElementById("Differensiert_eiendomsskatt_resultat").value = 140000;
 	
+//Årsgebyr for avløp, fordelt på spillvann og overvann
+document.getElementById("Aarsgebyr_for_avlop_vann_kvmbruksareal").value = 100;
+document.getElementById("Aarsgebyr_for_avlop_vann_antattforbrukperkvm").value = 1.3;
+document.getElementById("Aarsgebyr_for_avlop_vann_prisforbrukperkvm").value = 16.77;
+document.getElementById("Aarsgebyr_for_avlop_vann_sumgebyr").value = 2180;
+
+document.getElementById("Aarsgebyr_for_avlop_avlop_kvmbruksareal").value = 100;
+document.getElementById("Aarsgebyr_for_avlop_avlop_antattforbrukperkvm").value = 1.3;
+document.getElementById("Aarsgebyr_for_avlop_avlop_prisforbrukperkvm").value = 16.77;
+document.getElementById("Aarsgebyr_for_avlop_avlop_sumgebyr").value = 2180;
+
+document.getElementById("Aarsgebyr_for_avlop_abonnementsgebyr").value = 423;
+document.getElementById("Aarsgebyr_for_avlop_totaltvannogavlopsgebyr").value = 5979;
+document.getElementById("Aarsgebyr_for_avlop_vannmaalergebyrperaar").value = 2720;
+document.getElementById("Aarsgebyr_for_avlop_totalt").value = 8699;
+	
 // Event listener for calculate button for "Behov/kapasitet kalkulator"
 document.getElementById("calculate").addEventListener("click", simpleCalculation);
 
@@ -210,6 +226,31 @@ function costCalculation() {
 		
 	var Differensiert_eiendomsskatt_resultat = Differensiert_eiendomsskatt_eiendomsskatt1 - Differensiert_eiendomsskatt_eiendomsskatt2;
 	document.getElementById("Differensiert_eiendomsskatt_resultat").value = Differensiert_eiendomsskatt_resultat;
+	
+	//Årsgebyr for avløp, fordelt på spillvann og overvann
+	var Aarsgebyr_for_avlop_vann_kvmbruksareal = document.getElementById("Aarsgebyr_for_avlop_vann_kvmbruksareal").value;
+	var Aarsgebyr_for_avlop_vann_antattforbrukperkvm = document.getElementById("Aarsgebyr_for_avlop_vann_antattforbrukperkvm").value;
+	var Aarsgebyr_for_avlop_vann_prisforbrukperkvm = document.getElementById("Aarsgebyr_for_avlop_vann_prisforbrukperkvm").value;
+	
+	var Aarsgebyr_for_avlop_vann_sumgebyr = Math.round(Aarsgebyr_for_avlop_vann_kvmbruksareal * Aarsgebyr_for_avlop_vann_antattforbrukperkvm * Aarsgebyr_for_avlop_vann_prisforbrukperkvm);
+	document.getElementById("Aarsgebyr_for_avlop_vann_sumgebyr").value = Aarsgebyr_for_avlop_vann_sumgebyr;
+	
+	var Aarsgebyr_for_avlop_avlop_kvmbruksareal = document.getElementById("Aarsgebyr_for_avlop_avlop_kvmbruksareal").value;
+	var Aarsgebyr_for_avlop_avlop_antattforbrukperkvm = document.getElementById("Aarsgebyr_for_avlop_avlop_antattforbrukperkvm").value;
+	var Aarsgebyr_for_avlop_avlop_prisforbrukperkvm = document.getElementById("Aarsgebyr_for_avlop_avlop_prisforbrukperkvm").value;
+	
+	var Aarsgebyr_for_avlop_avlop_sumgebyr = Math.round(Aarsgebyr_for_avlop_avlop_kvmbruksareal * Aarsgebyr_for_avlop_avlop_antattforbrukperkvm * Aarsgebyr_for_avlop_avlop_prisforbrukperkvm);
+	document.getElementById("Aarsgebyr_for_avlop_avlop_sumgebyr").value = Aarsgebyr_for_avlop_avlop_sumgebyr;
+	
+	var Aarsgebyr_for_avlop_abonnementsgebyr = document.getElementById("Aarsgebyr_for_avlop_abonnementsgebyr").value;
+	
+	var Aarsgebyr_for_avlop_totaltvannogavlopsgebyr = Math.round(1.25 * (Aarsgebyr_for_avlop_abonnementsgebyr + Aarsgebyr_for_avlop_vann_sumgebyr + Aarsgebyr_for_avlop_avlop_sumgebyr));
+	document.getElementById("Aarsgebyr_for_avlop_totaltvannogavlopsgebyr").value = Aarsgebyr_for_avlop_totaltvannogavlopsgebyr;
+	
+	var Aarsgebyr_for_avlop_vannmaalergebyrperaar = document.getElementById("Aarsgebyr_for_avlop_vannmaalergebyrperaar").value;
+	
+	var Aarsgebyr_for_avlop_totalt = Aarsgebyr_for_avlop_totaltvannogavlopsgebyr + Aarsgebyr_for_avlop_vannmaalergebyrperaar;
+	document.getElementById("Aarsgebyr_for_avlop_totalt").value = Aarsgebyr_for_avlop_totalt;
 }
 
 </script>
