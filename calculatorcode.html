@@ -136,39 +136,39 @@ function simpleCalculation() {
 	var Oppsamlings_krav_1time = Input_Tomt_Areal * Input_oppsamlings_krav_1time;
 	var Oppsamlings_krav_2time = Input_Tomt_Areal * Input_oppsamlings_krav_2time;
 	
-	document.getElementById("Output_oppsamlings_1time").value = Oppsamlings_krav_1time;
-	document.getElementById("Output_oppsamlings_2time").value = Oppsamlings_krav_2time;
+	document.getElementById("Output_oppsamlings_1time").value = Math.round(Oppsamlings_krav_1time);
+	document.getElementById("Output_oppsamlings_2time").value = Math.round(Oppsamlings_krav_2time);
 	
 	var Input_pot_disp_per_sek_m2 = document.getElementById("Input_pot_disp_per_sek_m2").value / 1000;
 	var Liter_per_time_paaslipp = Input_Tomt_Areal * Input_pot_disp_per_sek_m2 * 3600;
-	document.getElementById("Output_liter_per_time_paaslipp").value = Liter_per_time_paaslipp;
+	document.getElementById("Output_liter_per_time_paaslipp").value = Math.round(Liter_per_time_paaslipp);
 	
 	var Oppsamlings_behov_1time = Oppsamlings_krav_1time - Liter_per_time_paaslipp;
 	var Oppsamlings_behov_2time = Oppsamlings_krav_2time - Liter_per_time_paaslipp;
-	document.getElementById("Output_oppsamlings_behov_1time").value = Oppsamlings_behov_1time;
-	document.getElementById("Output_oppsamlings_behov_2time").value = Oppsamlings_behov_2time;
+	document.getElementById("Output_oppsamlings_behov_1time").value = Math.round(Oppsamlings_behov_1time);
+	document.getElementById("Output_oppsamlings_behov_2time").value = Math.round(Oppsamlings_behov_2time);
 	
 	var Time1_oppsamling_tak_procent = 	document.getElementById("Input_oppsamlings_tak_1time").value;
 	var Time1_oppsamling_fasade_procent = document.getElementById("Input_oppsamlings_fasade_1time").value;
 	var Oppsamlings_tak_1time = (Time1_oppsamling_tak_procent / 100) * Oppsamlings_behov_1time;
 	var Oppsamlings_fasade_1time = (Time1_oppsamling_fasade_procent / 100) * Oppsamlings_behov_1time;
-	document.getElementById("Output_oppsamlings_tak_1time").value = Oppsamlings_tak_1time; 
-	document.getElementById("Output_oppsamlings_fasade_1time").value = Oppsamlings_fasade_1time;
+	document.getElementById("Output_oppsamlings_tak_1time").value = Math.round(Oppsamlings_tak_1time); 
+	document.getElementById("Output_oppsamlings_fasade_1time").value = Math.round(Oppsamlings_fasade_1time);
 	
 	var Time2_oppsamling_tak_procent = document.getElementById("Input_oppsamlings_tak_2time").value;	
 	var Time2_oppsamling_fasade_procent = document.getElementById("Input_oppsamlings_fasade_2time").value;
 	var Oppsamlings_tak_2time = (Time2_oppsamling_tak_procent / 100) * Oppsamlings_behov_2time; 
 	var Oppsamlings_fasade_2time = (Time2_oppsamling_fasade_procent / 100) * Oppsamlings_behov_2time;
-	document.getElementById("Output_oppsamlings_tak_2time").value = Oppsamlings_tak_2time;
-	document.getElementById("Output_oppsamlings_fasade_2time").value = Oppsamlings_fasade_2time;			
+	document.getElementById("Output_oppsamlings_tak_2time").value = Math.round(Oppsamlings_tak_2time);
+	document.getElementById("Output_oppsamlings_fasade_2time").value = Math.round(Oppsamlings_fasade_2time);			
 	
 	var Kapasitet_per_oppsam_res = document.getElementById("Output_kapasitet_per_oppsam_res").value;
 	var Antall_oppsam_res = ( Oppsamlings_tak_1time + Oppsamlings_tak_2time ) / Kapasitet_per_oppsam_res;
-	document.getElementById("Output_antall_oppsam_res").value = Antall_oppsam_res;
+	document.getElementById("Output_antall_oppsam_res").value = Math.round(Antall_oppsam_res);
 	
 	var Kapasitet_per_akvedukt = document.getElementById("Output_kapasitet_per_akvedukt").value;
 	var Behov_antall_akvedukt = ( Oppsamlings_fasade_1time + Oppsamlings_fasade_2time) / Kapasitet_per_akvedukt;
-	document.getElementById("Output_behov_antall_akvedukt").value = Behov_antall_akvedukt;
+	document.getElementById("Output_behov_antall_akvedukt").value = Math.round(Behov_antall_akvedukt);
 }	
 
 // Excel math-functions
