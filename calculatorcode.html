@@ -152,7 +152,7 @@ document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep
 document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_rente").addEventListener("change", costCalculation);
 document.getElementById("ESG_effekt_ordinaer_markedsverdi").addEventListener("change", costCalculation);
 document.getElementById("ESG_effekt_ordinaer_markedsverdi_i_percent").addEventListener("change", costCalculation);
-	
+console.log("costCalculation event listener done");	
 // -- Methods --
 	
 	
@@ -233,8 +233,9 @@ function PPMT(rate, per, nper, pv, fv, type) {
 }
 
 // Calculation method for filling out fields based on inputs
-function costCalculation() {
-	alert(123);
+function costCalculation() {	
+	console.log("costCalculation");
+	
     // -- Forlenget Amorteringstid --
     var Forlenget_amorteringstid_aar1 = document.getElementById("Forlenget_amorteringstid_aar1").value;
     var Forlenget_amorteringstid_aar2 = document.getElementById("Forlenget_amorteringstid_aar2").value;
