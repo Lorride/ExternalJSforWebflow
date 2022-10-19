@@ -49,6 +49,9 @@ document.getElementById("Overvannshandteringssystem_fullverdi_sum").value =  100
 document.getElementById("Overvannshandteringssystem_forsikringspremie_procent").value = 0.05;
 document.getElementById("Overvannshandteringssystem_forsikringspremie_delresultat").value = 50000;
 
+document.getElementById("Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent").value = 10;
+document.getElementById("Overvannshandteringssystem_forsikringspremie_besparelse").value = 5000;
+
 // Event listener for calculate button for "Behov/kapasitet kalkulator"
 document.getElementById("calculate").addEventListener("click", simpleCalculation);
 
@@ -178,6 +181,11 @@ function costCalculation() {
     var Overvannshandteringssystem_forsikringspremie_delresultat = Math.round(Overvannshandteringssystem_fullverdi_sum*Overvannshandteringssystem_forsikringspremie_procent);
 
     document.getElementById("Overvannshandteringssystem_forsikringspremie_delresultat").value = Overvannshandteringssystem_forsikringspremie_delresultat;
+
+    var Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent = document.getElementById("Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent").value / 100;
+    var Overvannshandteringssystem_forsikringspremie_besparelse = Math.round(Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent * Overvannshandteringssystem_forsikringspremie_delresultat);
+
+    document.getElementById("Overvannshandteringssystem_forsikringspremie_besparelse").value = Overvannshandteringssystem_forsikringspremie_besparelse;
 }
 
 </script>
