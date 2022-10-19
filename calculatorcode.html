@@ -45,7 +45,7 @@ document.getElementById("Anslag_okte_leieinntekter_procent").value = 5;
 document.getElementById("Anslag_okte_leieinntekter_resultat").value = 250000;
 
 //Overvannshåndteringssystem
-document.getElementById("Overvannshandteringssystem_fullverdi-sum").value =  100000000;
+document.getElementById("Overvannshandteringssystem_fullverdi_sum").value =  100000000;
 document.getElementById("Overvannshandteringssystem_forsikringspremie_procent").value = 0.05;
 document.getElementById("Overvannshandteringssystem_forsikringspremie_delresultat").value = 50000;
 
@@ -173,9 +173,9 @@ function costCalculation() {
     document.getElementById("Anslag_okte_leieinntekter_resultat").value = Anslag_okte_leieinntekter_resultat;
 
     // Overvannshåndteringssystem
-    var Overvannshandteringssystem_fullverdi-sum = document.getElementById("Overvannshandteringssystem_fullverdi-sum").value;
+    var Overvannshandteringssystem_fullverdi_sum = document.getElementById("Overvannshandteringssystem_fullverdi_sum").value;
     var Overvannshandteringssystem_forsikringspremie_procent = document.getElementById("Overvannshandteringssystem_forsikringspremie_procent").value / 100;
-    var Overvannshandteringssystem_forsikringspremie_delresultat = Math.round(Overvannshandteringssystem_fullverdi-sum*Overvannshandteringssystem_forsikringspremie_procent);
+    var Overvannshandteringssystem_forsikringspremie_delresultat = Math.round(Overvannshandteringssystem_fullverdi_sum*Overvannshandteringssystem_forsikringspremie_procent);
 
     document.getElementById("Overvannshandteringssystem_forsikringspremie_delresultat").value = Overvannshandteringssystem_forsikringspremie_delresultat;
 }
