@@ -92,11 +92,18 @@ document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_rentepercent").val
 document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_resultat").value = 322250;
 	
 	
-// Event listener for calculate button for "Behov/kapasitet kalkulator"
-document.getElementById("calculate").addEventListener("click", simpleCalculation);
+// Event listener for changes in inputs for "Behov/kapasitet kalkulator"
+document.getElementById("Input_Tomt_Areal").addEventListener("change", simpleCalculation);
 
 // Event listener for calculate button for "Kost/nytte kalkulator"
 document.getElementById("KostNytteKalkulerKnapp").addEventListener("click", costCalculation);
+document.getElementById("Input_oppsamlings_krav_1time").addEventListener("click", costCalculation);
+document.getElementById("Input_oppsamlings_krav_2time").addEventListener("click", costCalculation);
+document.getElementById("Input_pot_disp_per_sek_m2").addEventListener("click", costCalculation);
+document.getElementById("Input_oppsamlings_tak_1time").addEventListener("click", costCalculation);
+document.getElementById("Input_oppsamlings_fasade_1time").addEventListener("click", costCalculation);
+document.getElementById("Input_oppsamlings_tak_2time").addEventListener("click", costCalculation);
+document.getElementById("Input_oppsamlings_fasade_2time").addEventListener("click", costCalculation);
 
 // Calculation method for filling out fields based on inputs
 function simpleCalculation() {
