@@ -77,6 +77,12 @@ document.getElementById("Aarsgebyr_for_avlop_totaltvannogavlopsgebyr").value = 5
 document.getElementById("Aarsgebyr_for_avlop_vannmaalergebyrperaar").value = 2720;
 document.getElementById("Aarsgebyr_for_avlop_totalt").value = 8699;
 	
+//-- Sum driftsresultat-forbedringer --
+document.getElementById("Sum_driftsresultat_forbedringer").value = 645000;
+	
+// -- Kostnader, vedlikehold/planteskjøtsel --
+document.getElementById("Kostnader_vedlikehold_planteskjotsel").value = 200000;	
+	
 // Event listener for calculate button for "Behov/kapasitet kalkulator"
 document.getElementById("calculate").addEventListener("click", simpleCalculation);
 
@@ -251,6 +257,10 @@ function costCalculation() {
 	
 	var Aarsgebyr_for_avlop_totalt = parseInt(Aarsgebyr_for_avlop_totaltvannogavlopsgebyr) + parseInt(Aarsgebyr_for_avlop_vannmaalergebyrperaar);
 	document.getElementById("Aarsgebyr_for_avlop_totalt").value = Aarsgebyr_for_avlop_totalt;
+	
+	//-- Sum driftsresultat-forbedringer --
+	var Sum_driftsresultat_forbedringer document.getElementById("Sum_driftsresultat_forbedringer").value = parseInt(Besparelse_lonerente_resultat) + parseInt(Anslag_okte_leieinntekter_resultat) + parseInt(Overvannshandteringssystem_forsikringspremie_besparelse) + parseInt(Differensiert_eiendomsskatt_resultat);
+	document.getElementById("Sum_driftsresultat_forbedringer").value = Sum_driftsresultat_forbedringer;
 }
 
 </script>
