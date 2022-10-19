@@ -51,7 +51,16 @@ document.getElementById("Overvannshandteringssystem_forsikringspremie_delresulta
 
 document.getElementById("Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent").value = 10;
 document.getElementById("Overvannshandteringssystem_forsikringspremie_besparelse").value = 5000;
-
+	
+// -- Bærekraftig bygning; fangst av klimagasser mv --
+//Differensiert eiendomsskatt
+document.getElementById("Differensiert_eiendomsskatt_skattegrunnlag").value = 70000000;
+document.getElementById("Differensiert_eiendomsskatt_skattesatsprocent1").value = 0.4;
+document.getElementById("Differensiert_eiendomsskatt_skattesatsprocent2").value = 0.2;
+document.getElementById("Differensiert_eiendomsskatt_eiendomsskatt1").value = 280000;
+document.getElementById("Differensiert_eiendomsskatt_eiendomsskatt2").value = 140000;
+document.getElementById("Differensiert_eiendomsskatt_resultat").value = 140000;
+	
 // Event listener for calculate button for "Behov/kapasitet kalkulator"
 document.getElementById("calculate").addEventListener("click", simpleCalculation);
 
@@ -186,6 +195,21 @@ function costCalculation() {
     var Overvannshandteringssystem_forsikringspremie_besparelse = Math.round(Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent * Overvannshandteringssystem_forsikringspremie_delresultat);
 
     document.getElementById("Overvannshandteringssystem_forsikringspremie_besparelse").value = Overvannshandteringssystem_forsikringspremie_besparelse;
+	
+    // -- Bærekraftig bygning; fangst av klimagasser mv --
+    //Differensiert eiendomsskatt
+    var Differensiert_eiendomsskatt_skattegrunnlag = document.getElementById("Differensiert_eiendomsskatt_skattegrunnlag").value;
+	var Differensiert_eiendomsskatt_skattesatsprocent1 = document.getElementById("Differensiert_eiendomsskatt_skattesatsprocent1").value / 100;
+	var Differensiert_eiendomsskatt_skattesatsprocent2 = document.getElementById("Differensiert_eiendomsskatt_skattesatsprocent2").value / 100;	
+	
+	var Differensiert_eiendomsskatt_eiendomsskatt1 = Math.round(Differensiert_eiendomsskatt_skattegrunnlag * Differensiert_eiendomsskatt_skattesatsprocent1);
+	document.getElementById("Differensiert_eiendomsskatt_eiendomsskatt1").value = Differensiert_eiendomsskatt_eiendomsskatt1;
+	
+	var Differensiert_eiendomsskatt_eiendomsskatt2 = Math.round(Differensiert_eiendomsskatt_skattegrunnlag * Differensiert_eiendomsskatt_skattesatsprocent2);
+	document.getElementById("Differensiert_eiendomsskatt_eiendomsskatt2").value = Differensiert_eiendomsskatt_eiendomsskatt2;
+		
+	var Differensiert_eiendomsskatt_resultat = Differensiert_eiendomsskatt_eiendomsskatt1 - Differensiert_eiendomsskatt_eiendomsskatt2;
+	document.getElementById("Differensiert_eiendomsskatt_resultat").value = Differensiert_eiendomsskatt_resultat;
 }
 
 </script>
