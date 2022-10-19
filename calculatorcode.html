@@ -87,10 +87,28 @@ document.getElementById("Kostnader_vedlikehold_planteskjotsel").value = 200000;
 document.getElementById("Forbedret_driftsresultat_foer_leiekostnader").value = 445000;
 	
 // -- Langsiktig årlig leie av GROW UP!-anlegg --	
+document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_aar").value = 8;
 document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep").value = 2000000;
 document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_rentepercent").value = 8;
 document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_resultat").value = 322250;
 	
+// -- Forbedret driftsresultat etter leiekostnader --
+document.getElementById("Forbedret_driftsresultat_etter_leiekostnader").value = 122750;
+	
+// -- Differanse_amortering --
+document.getElementById("Differanse_amortering").value = 562002;
+	
+// -- Sum resultat- og likviditetsforbedring (før skatt) --
+document.getElementById("Sum_resultat_likviditetsforbedring_foer_skatt").value =  684753;
+	
+// -- "ESG"-effekt av ordinær markedsverdi --
+document.getElementById("ESG_effekt_ordinaer_markedsverdi").value = 100000000;
+document.getElementById("ESG_effekt_ordinaer_markedsverdi_i_percent").value = 5;
+document.getElementById("ESG_effekt_ordinaer_markedsverdi_resultat").value = 5000000;
+
+	
+// -- Listeners --
+
 	
 // Event listener for changes in inputs for "Behov/kapasitet kalkulator"
 document.getElementById("Input_Tomt_Areal").addEventListener("change", simpleCalculation);
@@ -105,6 +123,10 @@ document.getElementById("Input_oppsamlings_fasade_2time").addEventListener("chan
 
 // Event listener for calculate button for "Kost/nytte kalkulator"
 document.getElementById("KostNytteKalkulerKnapp").addEventListener("click", costCalculation);	
+
+	
+// -- Methods --
+	
 	
 // Calculation method for filling out fields based on inputs
 function simpleCalculation() {
@@ -194,19 +216,18 @@ function costCalculation() {
     var Forlenget_amorteringstid_procent1 = document.getElementById("Forlenget_amorteringstid_procent1").value / 100;
     var Forlenget_amorteringstid_procent2 = document.getElementById("Forlenget_amorteringstid_procent2").value / 100;
 
-    var Forlenget_amorteringstid_rentekost1 = document.getElementById("Forlenget_amorteringstid_rentekost1").value;
-    var Forlenget_amorteringstid_rentekost2 = document.getElementById("Forlenget_amorteringstid_rentekost2").value;
+	var Forlenget_amorteringstid_rentekost1 = Math.round(Forlenget_amorteringstid_lonebelop1 * Forlenget_amorteringstid_procent1);
+    var Forlenget_amorteringstid_rentekost2 = Math.round(Forlenget_amorteringstid_lonebelop2 * Forlenget_amorteringstid_procent2);
+    document.getElementById("Forlenget_amorteringstid_rentekost1").value = Forlenget_amorteringstid_rentekost1;
+    document.getElementById("Forlenget_amorteringstid_rentekost2").value = Forlenget_amorteringstid_rentekost2;
 
-    var Forlenget_amorteringstid_renteavdrag1 = document.getElementById("Forlenget_amorteringstid_renteavdrag1").value;
-    var Forlenget_amorteringstid_renteavdrag2 = document.getElementById("Forlenget_amorteringstid_renteavdrag2").value;
+	var Forlenget_amorteringstid_renteavdrag1 = Math.round(PPMT(Forlenget_amorteringstid_procent1, Forlenget_amorteringstid_aar1, Forlenget_amorteringstid_aar1, Forlenget_amorteringstid_lonebelop1, 0, 0));
+    var Forlenget_amorteringstid_renteavdrag2 = Math.round(PPMT(Forlenget_amorteringstid_procent2, Forlenget_amorteringstid_aar2, Forlenget_amorteringstid_aar2, Forlenget_amorteringstid_lonebelop2, 0, 0));
+    document.getElementById("Forlenget_amorteringstid_renteavdrag1").value = Forlenget_amorteringstid_renteavdrag1;
+    document.getElementById("Forlenget_amorteringstid_renteavdrag2").value = Forlenget_amorteringstid_renteavdrag2;
 
-    document.getElementById("Forlenget_amorteringstid_rentekost1").value = Math.round(Forlenget_amorteringstid_lonebelop1 * Forlenget_amorteringstid_procent1);
-    document.getElementById("Forlenget_amorteringstid_rentekost2").value = Math.round(Forlenget_amorteringstid_lonebelop2 * Forlenget_amorteringstid_procent2);
-
-    document.getElementById("Forlenget_amorteringstid_renteavdrag1").value = Math.round(PPMT(Forlenget_amorteringstid_procent1, Forlenget_amorteringstid_aar1, Forlenget_amorteringstid_aar1, Forlenget_amorteringstid_lonebelop1, 0, 0));
-    document.getElementById("Forlenget_amorteringstid_renteavdrag2").value = Math.round(PPMT(Forlenget_amorteringstid_procent2, Forlenget_amorteringstid_aar2, Forlenget_amorteringstid_aar2, Forlenget_amorteringstid_lonebelop2, 0, 0));
-
-    document.getElementById("Forlenget_amorteringstid_bedret_likviditet").value = document.getElementById("Forlenget_amorteringstid_renteavdrag1").value - document.getElementById("Forlenget_amorteringstid_renteavdrag2").value;
+	var Forlenget_amorteringstid_bedret_likviditet = document.getElementById("Forlenget_amorteringstid_renteavdrag1").value - document.getElementById("Forlenget_amorteringstid_renteavdrag2").value; 
+    document.getElementById("Forlenget_amorteringstid_bedret_likviditet").value = Forlenget_amorteringstid_bedret_likviditet;
 
     // -- Besparelse Lånerente --
     var Besparelse_lonerente_lonebelop = document.getElementById("Besparelse_lonerente_lonebelop").value;
@@ -287,11 +308,31 @@ function costCalculation() {
 	document.getElementById("Forbedret_driftsresultat_foer_leiekostnader").value = Forbedret_driftsresultat_foer_leiekostnader;
 	
 	// -- Langsiktig årlig leie av GROW UP!-anlegg --	
+	var Langsiktig_aarlig_leie_GROWUP_anlegg_aar = document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_aar").value;
 	var Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep = document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep").value;
 	var Langsiktig_aarlig_leie_GROWUP_anlegg_rentepercent = document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_rentepercent").value / 100;
 
-	var Langsiktig_aarlig_leie_GROWUP_anlegg_resultat =  Math.round(PPMT(Langsiktig_aarlig_leie_GROWUP_anlegg_rentepercent, 1, 1, Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep, 0, 0));
+	var Langsiktig_aarlig_leie_GROWUP_anlegg_resultat =  Math.round(PPMT(Langsiktig_aarlig_leie_GROWUP_anlegg_rentepercent, Langsiktig_aarlig_leie_GROWUP_anlegg_aar, Langsiktig_aarlig_leie_GROWUP_anlegg_aar, Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep, 0, 0));
 	document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_resultat").value = Langsiktig_aarlig_leie_GROWUP_anlegg_resultat;
+	
+	// -- Forbedret driftsresultat etter leiekostnader --
+	var Forbedret_driftsresultat_etter_leiekostnader = Math.round(parseInt(Forbedret_driftsresultat_foer_leiekostnader) + parseInt(Langsiktig_aarlig_leie_GROWUP_anlegg_resultat));
+	document.getElementById("Forbedret_driftsresultat_etter_leiekostnader").value = Forbedret_driftsresultat_etter_leiekostnader;
+	
+	// -- Differanse_amortering -- 
+	var Differanse_amortering = -1 * parseInt(Forlenget_amorteringstid_bedret_likviditet);
+	document.getElementById("Differanse_amortering").value = Differanse_amortering;
+	
+	// -- Sum resultat- og likviditetsforbedring (før skatt) --
+	var Sum_resultat_likviditetsforbedring_foer_skatt = parseInt(Differanse_amortering) + parseInt(Forbedret_driftsresultat_etter_leiekostnader);
+	document.getElementById("Sum_resultat_likviditetsforbedring_foer_skatt").value = Sum_resultat_likviditetsforbedring_foer_skatt;
+	
+	// -- "ESG"-effekt av ordinær markedsverdi --
+	var ESG_effekt_ordinaer_markedsverdi = document.getElementById("ESG_effekt_ordinaer_markedsverdi").value;
+	var ESG_effekt_ordinaer_markedsverdi_i_percent = document.getElementById("ESG_effekt_ordinaer_markedsverdi_i_percent").value / 100;
+	
+	var ESG_effekt_ordinaer_markedsverdi_resultat = ESG_effekt_ordinaer_markedsverdi * ESG_effekt_ordinaer_markedsverdi_i_percent;
+	document.getElementById("ESG_effekt_ordinaer_markedsverdi_resultat").value = ESG_effekt_ordinaer_markedsverdi_resultat;
 }
 
 </script>
