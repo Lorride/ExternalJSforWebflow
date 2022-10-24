@@ -115,10 +115,10 @@ document.getElementById("Input_Tomt_Areal").addEventListener("change", simpleCal
 document.getElementById("Input_oppsamlings_krav_1time").addEventListener("change", simpleCalculation);
 document.getElementById("Input_oppsamlings_krav_2time").addEventListener("change", simpleCalculation);
 document.getElementById("Input_pot_disp_per_sek_m2").addEventListener("change", simpleCalculation);
-document.getElementById("Input_oppsamlings_tak_1time").addEventListener("change", simpleCalculation);
-document.getElementById("Input_oppsamlings_fasade_1time").addEventListener("change", simpleCalculation);
-document.getElementById("Input_oppsamlings_tak_2time").addEventListener("change", simpleCalculation);
-document.getElementById("Input_oppsamlings_fasade_2time").addEventListener("change", simpleCalculation);
+document.getElementById("Input_oppsamlings_tak_1time").addEventListener("change", setProcent_tak1time);
+document.getElementById("Input_oppsamlings_fasade_1time").addEventListener("change", setProcent_fasade1time);
+document.getElementById("Input_oppsamlings_tak_2time").addEventListener("change", setProcent_tak2time);
+document.getElementById("Input_oppsamlings_fasade_2time").addEventListener("change", setProcent_fasade2time);
 
 // Event listener for calculate button for "Kost/nytte kalkulator"
 document.getElementById("Forlenget_amorteringstid_aar1").addEventListener("change", costCalculation);	
@@ -151,9 +151,65 @@ document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep
 document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_rente").addEventListener("change", costCalculation);
 document.getElementById("ESG_effekt_ordinaer_markedsverdi").addEventListener("change", costCalculation);
 document.getElementById("ESG_effekt_ordinaer_markedsverdi_i_percent").addEventListener("change", costCalculation);
-console.log("costCalculation event listener done");	
+
 // -- Methods --
-	
+
+// Calculation method for automatically setting procent in inputs based on user input and checkbox state
+function setProcent_tak1time() {		
+    if ( document.getElementById("Checkbox").checked === false ) {
+        if ( document.getElementById("Input_oppsamlings_tak_1time").value >= 100 ) {
+            document.getElementById("Input_oppsamlings_tak_1time").value = 100;
+            document.getElementById("Input_oppsamlings_fasade_1time").value = 0;
+        } else {
+            document.getElementById("Input_oppsamlings_fasade_1time").value = 100 - document.getElementById("Input_oppsamlings_tak_1time").value;   
+        }
+    }
+
+    // Calculate
+    simpleCalculation;
+}
+
+function setProcent_fasade1time() {
+    if ( document.getElementById("Checkbox").checked === false ) {
+        if (document.getElementById("Input_oppsamlings_fasade_1time").value >= 100) {
+            document.getElementById("Input_oppsamlings_fasade_1time").value = 100; 
+            document.getElementById("Input_oppsamlings_tak_1time").value = 0;                   
+        } else {
+            document.getElementById("Input_oppsamlings_tak_1time").value = 100 - document.getElementById("Input_oppsamlings_fasade_1time").value;   
+        }
+    }
+    
+    // Calculate
+    simpleCalculation;
+}
+
+function setProcent_tak2time() {
+    if ( document.getElementById("Checkbox").checked === false ) {
+        if (document.getElementById("Input_oppsamlings_tak_2time").value >= 100) {
+            document.getElementById("Input_oppsamlings_tak_2time").value = 100;
+            document.getElementById("Input_oppsamlings_fasade_2time").value = 0;        
+        } else {
+            document.getElementById("Input_oppsamlings_fasade_2time").value = 100 - document.getElementById("Input_oppsamlings_tak_2time").value;   
+        }
+    }
+
+    // Calculate
+    simpleCalculation;
+}
+
+function setProcent_fasade2time() {
+    if ( document.getElementById("Checkbox").checked === false ) {
+        if (document.getElementById("Input_oppsamlings_fasade_2time").value >= 100) {
+            document.getElementById("Input_oppsamlings_fasade_2time").value = 100
+            document.getElementById("Input_oppsamlings_tak_2time").value = 0;        
+        } else {
+            document.getElementById("Input_oppsamlings_tak_2time").value = 100 - document.getElementById("Input_oppsamlings_fasade_2time").value;   
+        }
+    }
+    
+    // Calculate
+    simpleCalculation;
+}	
 	
 // Calculation method for filling out fields based on inputs
 function simpleCalculation() {
