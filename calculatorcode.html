@@ -105,10 +105,13 @@ document.getElementById("Sum_resultat_likviditetsforbedring_foer_skatt").value =
 document.getElementById("ESG_effekt_ordinaer_markedsverdi").value = 100000000;
 document.getElementById("ESG_effekt_ordinaer_markedsverdi_i_percent").value = 5;
 document.getElementById("ESG_effekt_ordinaer_markedsverdi_resultat").value = 5000000;
-
+	
+// -- States of inputs for "Behov/kapasitet kalkulator" --
+	
+document.getElementById('Input_oppsamlings_tak_2time').setAttribute("readonly", "");
+document.getElementById('Input_oppsamlings_fasade_2time').setAttribute("readonly", "");
 	
 // -- Listeners --
-
 	
 // Event listener for changes in inputs for "Behov/kapasitet kalkulator"
 document.getElementById("Input_Tomt_Areal").addEventListener("change", simpleCalculation);
@@ -165,6 +168,9 @@ function setProcent_tak1time() {
         }
     }
 
+    document.getElementById("Input_oppsamlings_tak_2time").value = document.getElementById("Input_oppsamlings_tak_1time").value;
+    document.getElementById("Input_oppsamlings_fasade_2time").value = document.getElementById("Input_oppsamlings_fasade_1time").value;
+
     // Calculate
     simpleCalculation();
 }
@@ -178,38 +184,13 @@ function setProcent_fasade1time() {
             document.getElementById("Input_oppsamlings_tak_1time").value = 100 - document.getElementById("Input_oppsamlings_fasade_1time").value;   
         }
     }
-    
-    // Calculate
-    simpleCalculation();
-}
-
-function setProcent_tak2time() {
-    if ( document.getElementById("Checkbox").checked === false ) {
-        if (document.getElementById("Input_oppsamlings_tak_2time").value >= 100) {
-            document.getElementById("Input_oppsamlings_tak_2time").value = 100;
-            document.getElementById("Input_oppsamlings_fasade_2time").value = 0;        
-        } else {
-            document.getElementById("Input_oppsamlings_fasade_2time").value = 100 - document.getElementById("Input_oppsamlings_tak_2time").value;   
-        }
-    }
+ 
+    document.getElementById("Input_oppsamlings_tak_2time").value = document.getElementById("Input_oppsamlings_tak_1time").value;
+    document.getElementById("Input_oppsamlings_fasade_2time").value = document.getElementById("Input_oppsamlings_fasade_1time").value;
 
     // Calculate
     simpleCalculation();
 }
-
-function setProcent_fasade2time() {
-    if ( document.getElementById("Checkbox").checked === false ) {
-        if (document.getElementById("Input_oppsamlings_fasade_2time").value >= 100) {
-            document.getElementById("Input_oppsamlings_fasade_2time").value = 100
-            document.getElementById("Input_oppsamlings_tak_2time").value = 0;        
-        } else {
-            document.getElementById("Input_oppsamlings_tak_2time").value = 100 - document.getElementById("Input_oppsamlings_fasade_2time").value;   
-        }
-    }
-    
-    // Calculate
-    simpleCalculation();
-}	
 	
 // Calculation method for filling out fields based on inputs
 function simpleCalculation() {
