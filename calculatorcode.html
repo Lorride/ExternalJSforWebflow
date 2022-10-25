@@ -1,4 +1,7 @@
 <script>
+	
+// Global variables for cross calculation between each calculators output
+var Global_Input_vektkalk_antallakveduktplantekasserfraovervann = 0.0;
 
 // Setting inital values on page for "Behov/kapasitet kalkulator"
 document.getElementById("Input_oppsamlings_krav_1time").value = 50;
@@ -105,8 +108,20 @@ document.getElementById("Sum_resultat_likviditetsforbedring_foer_skatt").value =
 document.getElementById("ESG_effekt_ordinaer_markedsverdi").value = 100000000;
 document.getElementById("ESG_effekt_ordinaer_markedsverdi_i_percent").value = 5;
 document.getElementById("ESG_effekt_ordinaer_markedsverdi_resultat").value = 5000000;
+
+
+// Setting inital values on page for "vektberegning"
+document.getElementById("Input_vektkalk_vannperakvedukt").value = 5.2;
+document.getElementById("Input_vektkalk_vaatjordkgperplantekasse").value = 11;
+document.getElementById("Input_vektkalk_egenvektplatekasse").value = 1.7;
+document.getElementById("Input_vektkalk_egenvektakvedukt").value = 1.1;
+document.getElementById("Input_vektkalk_egenvektaludeksel").value = 1.0;
+document.getElementById("Output_vektkalk_totalvektinkvegetasjon").value = 19.9;
+document.getElementById("Input_vektkalk_antallakveduktplantekasserfraovervann").value = 233;
+document.getElementById("Output_vektkalk_sumvekt").value = 5;
 	
-// -- States of inputs for "Behov/kapasitet kalkulator" --
+	
+// -- States of inputs for "Behov/kapasitet" kalkulator" --
 	
 document.getElementById('Input_oppsamlings_tak_2time').setAttribute("readonly", "");
 document.getElementById('Input_oppsamlings_fasade_2time').setAttribute("readonly", "");
@@ -155,6 +170,14 @@ document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_rente").addEventLi
 document.getElementById("ESG_effekt_ordinaer_markedsverdi").addEventListener("change", costCalculation);
 document.getElementById("ESG_effekt_ordinaer_markedsverdi_i_percent").addEventListener("change", costCalculation);
 
+// Event listener for calculate button for "Vektberegning"
+document.getElementById("Input_vektkalk_vannperakvedukt").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_vaatjordkgperplantekasse").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvektplatekasse").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvektakvedukt").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvektaludeksel").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_antallakveduktplantekasserfraovervann").addEventListener("change", weightCalculation);
+	
 // -- Methods --
 
 // Calculation method for automatically setting procent in inputs based on user input and checkbox state
@@ -232,6 +255,7 @@ function simpleCalculation() {
 	
 	var Kapasitet_per_akvedukt = document.getElementById("Output_kapasitet_per_akvedukt").value;
 	var Behov_antall_akvedukt = ( Oppsamlings_fasade_1time + Oppsamlings_fasade_2time) / Kapasitet_per_akvedukt;
+	Global_Input_vektkalk_antallakveduktplantekasserfraovervann = Behov_antall_akvedukt;
 	document.getElementById("Output_behov_antall_akvedukt").value = Math.round(Behov_antall_akvedukt);
 }	
 
@@ -270,8 +294,6 @@ function PPMT(rate, per, nper, pv, fv, type) {
 
 // Calculation method for filling out fields based on inputs
 function costCalculation() {	
-	console.log("costCalculation");
-	
     // -- Forlenget Amorteringstid --
     var Forlenget_amorteringstid_aar1 = document.getElementById("Forlenget_amorteringstid_aar1").value;
     var Forlenget_amorteringstid_aar2 = document.getElementById("Forlenget_amorteringstid_aar2").value;
@@ -401,4 +423,21 @@ function costCalculation() {
 	document.getElementById("ESG_effekt_ordinaer_markedsverdi_resultat").value = ESG_effekt_ordinaer_markedsverdi_resultat;
 }
 
+// Calculation method for filling out fields based on inputs
+function weightCalculation() {
+	var Input_vektkalk_vannperakvedukt = document.getElementById("Input_vektkalk_vannperakvedukt").value;
+	var Input_vektkalk_vaatjordkgperplantekasse = document.getElementById("Input_vektkalk_vaatjordkgperplantekasse").value;
+	var Input_vektkalk_egenvektplatekasse = document.getElementById("Input_vektkalk_egenvektplatekasse").value;
+	var Input_vektkalk_egenvektakvedukt = document.getElementById("Input_vektkalk_egenvektakvedukt").value;
+	var Input_vektkalk_egenvektaludeksel = document.getElementById("Input_vektkalk_egenvektaludeksel").value;
+	
+	var Output_vektkalk_totalvektinkvegetasjon = parseInt(Input_vektkalk_vannperakvedukt) + parseInt(Input_vektkalk_vaatjordkgperplantekasse) + parseInt(Input_vektkalk_egenvektplatekasse) + parseInt(Input_vektkalk_egenvektakvedukt) + parseInt(Input_vektkalk_egenvektaludeksel);
+	document.getElementById("Output_vektkalk_totalvektinkvegetasjon").value = Output_vektkalk_totalvektinkvegetasjon;
+	
+	document.getElementById("Input_vektkalk_antallakveduktplantekasserfraovervann").value = Global_Input_vektkalk_antallakveduktplantekasserfraovervann;
+		
+	var Output_vektkalk_sumvekt = Math.round((Global_Input_vektkalk_antallakveduktplantekasserfraovervann * Output_vektkalk_totalvektinkvegetasjon) / 1000);
+	document.getElementById("Output_vektkalk_sumvekt").value = Output_vektkalk_sumvekt;
+}
+	
 </script>
