@@ -364,10 +364,10 @@ function rainCostCalculation() {
 	var Input_tilbud_fas_platekassevannreantall = document.getElementById("Input_tilbud_fas_platekassevannreantall").value;
 	var Input_tilbud_fas_platekassevannrepriseksmva = document.getElementById("Input_tilbud_fas_platekassevannrepriseksmva").value;
 	
-	var Input_tilbud_res_delsum = Math.round(parseInt(Input_tilbud_fas_platekassevannreantall) * parseInt(Input_tilbud_fas_platekassevannrepriseksmva));
+	var Input_tilbud_fas_platekassevannredelsum = Math.round(parseInt(Input_tilbud_fas_platekassevannreantall) * parseInt(Input_tilbud_fas_platekassevannrepriseksmva));
 	document.getElementById("Input_tilbud_fas_platekassevannredelsum").value = Input_tilbud_fas_platekassevannredelsum;
 	
-	var Output_tilbud_fas_summaterialkost = Input_tilbud_res_delsum;
+	var Output_tilbud_fas_summaterialkost = Input_tilbud_fas_platekassevannredelsum;
 	document.getElementById("Output_tilbud_fas_summaterialkost").value = Output_tilbud_fas_summaterialkost;
 	
 	var Input_tilbud_fas_monteringprosent = (document.getElementById("Input_tilbud_fas_monteringprosent").value / 100);
