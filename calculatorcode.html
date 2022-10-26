@@ -320,7 +320,37 @@ function simpleCalculation() {
 function rainCostCalculation() {
 	var Input_tilbud_res_resantall = document.getElementById("Input_tilbud_res_resantall").value;
 	var Input_tilbud_res_priseksmva = document.getElementById("Input_tilbud_res_priseksmva").value;
-	var Input_tilbud_res_delsum	= document.getElementById("Input_tilbud_res_delsum").value;
+	
+	var Input_tilbud_res_delsum = Math.round(parseInt(Input_tilbud_res_resantall) * parseInt(Input_tilbud_res_priseksmva));
+	document.getElementById("Input_tilbud_res_delsum").value = Input_tilbud_res_delsum;
+
+	var Input_tilbud_res_storelokkantall = document.getElementById("Input_tilbud_res_storelokkantall").value;
+	var Input_tilbud_res_storelokkpriseksmva = document.getElementById("Input_tilbud_res_storelokkpriseksmva").value;
+	
+	var Input_tilbud_res_storelokkdelsum = Math.round(parseInt(Input_tilbud_res_storelokkantall) * parseInt(Input_tilbud_res_storelokkpriseksmva));
+	document.getElementById("Input_tilbud_res_storelokkdelsum").value = Input_tilbud_res_storelokkdelsum;
+	
+	var Input_tilbud_res_dyrkekasseantall = document.getElementById("Input_tilbud_res_dyrkekasseantall").value;
+	var Input_tilbud_res_dyrkekassepriseksmva = document.getElementById("Input_tilbud_res_dyrkekassepriseksmva").value;
+	
+	var Input_tilbud_res_dyrkekassedelsum = Math.round(parseInt(Input_tilbud_res_dyrkekasseantall) * parseInt(Input_tilbud_res_dyrkekassepriseksmva));
+	document.getElementById("Input_tilbud_res_dyrkekassedelsum").value = Input_tilbud_res_dyrkekassedelsum;
+	
+	var Input_tilbud_res_smaalokkantall = document.getElementById("Input_tilbud_res_smaalokkantall").value;
+	var Input_tilbud_res_smaalokkpriseksmva = document.getElementById("Input_tilbud_res_smaalokkpriseksmva").value;
+	
+	var Input_tilbud_res_smaalokkdelsum = Math.round(parseInt(Input_tilbud_res_smaalokkantall) * parseInt(Input_tilbud_res_smaalokkpriseksmva));
+	document.getElementById("Input_tilbud_res_smaalokkdelsum").value = Input_tilbud_res_smaalokkdelsum;
+	
+	var Output_tilbud_res_summaterialkost = parseInt(Input_tilbud_res_delsum) + parseInt(Input_tilbud_res_storelokkdelsum) + parseInt(Input_tilbud_res_dyrkekassedelsum) + parseInt(Input_tilbud_res_smaalokkdelsum);
+	document.getElementById("Output_tilbud_res_summaterialkost").value = Output_tilbud_res_summaterialkost;
+	
+	var Input_tilbud_res_monteringprosent = (document.getElementById("Input_tilbud_res_monteringprosent").value / 100);
+	var Input_tilbud_res_monteringsum = Math.round(Input_tilbud_res_monteringprosent * Output_tilbud_res_summaterialkost);
+	document.getElementById("Input_tilbud_res_monteringsum").value = Input_tilbud_res_monteringsum
+	
+	var Output_tilbud_res_sum = parseInt(Output_tilbud_res_summaterialkost) + parseInt(Input_tilbud_res_monteringsum);
+	document.getElementById("Output_tilbud_res_sum").value = Output_tilbud_res_sum;
 }
 
 // Excel math-functions
