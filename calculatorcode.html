@@ -311,8 +311,14 @@ function simpleCalculation() {
 	
 	var Kapasitet_per_akvedukt = document.getElementById("Output_kapasitet_per_akvedukt").value;
 	var Behov_antall_akvedukt = ( Oppsamlings_fasade_1time + Oppsamlings_fasade_2time) / Kapasitet_per_akvedukt;
-	//Global_Input_vektkalk_antallakveduktplantekasserfraovervann = Behov_antall_akvedukt;
 	document.getElementById("Output_behov_antall_akvedukt").value = Math.round(Behov_antall_akvedukt);
+	
+	// Add result to other calculators input fields:
+	document.getElementById("Input_tilbud_res_resantall").value = Math.round(Antall_oppsam_res);
+	document.getElementById("Input_tilbud_res_storelokkantall").value = Math.round(Antall_oppsam_res);
+	
+	document.getElementById("Input_tilbud_fas_platekassevannreantall").value = Math.round(Behov_antall_akvedukt);
+	document.getElementById("Input_vegetasjonfas_antall").value = Math.round(Behov_antall_akvedukt);
 	
 	rainCostCalculation();
 }
