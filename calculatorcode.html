@@ -26,9 +26,9 @@ document.getElementById("Input_tilbud_res_storelokkdelsum").value = 109106;
 document.getElementById("Input_tilbud_res_dyrkekasseantall").value = 172;
 document.getElementById("Input_tilbud_res_dyrkekassepriseksmva").value = 844;
 document.getElementById("Input_tilbud_res_dyrkekassedelsum").value = 145125;
-document.getElementById("Input_tilbud_res_smålokkantall").value = 86;
-document.getElementById("Input_tilbud_res_smålokkpriseksmva").value = 394;
-document.getElementById("Input_tilbud_res_smålokkdelsum").value = 33884;
+document.getElementById("Input_tilbud_res_smaalokkantall").value = 86;
+document.getElementById("Input_tilbud_res_smaalokkpriseksmva").value = 394;
+document.getElementById("Input_tilbud_res_smaalokkdelsum").value = 33884;
 document.getElementById("Output_tilbud_res_summaterialkost").value = 455412;
 document.getElementById("Input_tilbud_res_monteringprosent").value = 25;
 document.getElementById("Input_tilbud_res_monteringsum").value = 113853;
@@ -173,8 +173,27 @@ document.getElementById("Input_oppsamlings_krav_2time").addEventListener("change
 document.getElementById("Input_pot_disp_per_sek_m2").addEventListener("change", simpleCalculation);
 document.getElementById("Input_oppsamlings_tak_1time").addEventListener("change", setProcent_tak1time);
 document.getElementById("Input_oppsamlings_fasade_1time").addEventListener("change", setProcent_fasade1time);
+	
+document.getElementById("Input_tilbud_res_resantall").addEventListener("change", rainCostCalculation);
+document.getElementById("Input_tilbud_res_priseksmva").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_storelokkantall").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_storelokkpriseksmva").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_dyrkekasseantall").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_dyrkekassepriseksmva").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_smaalokkantall").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_smaalokkpriseksmva").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_monteringprosent").addEventListener("change", rainCostCalculation); 
 
-// Event listener for calculate button for "Kost/nytte kalkulator"
+document.getElementById("Input_tilbud_fas_platekassevannreantall").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_fas_platekassevannrepriseksmva").addEventListener("change", rainCostCalculation); 
+
+document.getElementById("Output_tilbud_fas_summaterialkost").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_fas_monteringprosent").addEventListener("change", rainCostCalculation); 
+
+document.getElementById("Input_vegetasjontak_antall").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_vegetasjonfas_antall").addEventListener("change", rainCostCalculation); 
+	
+// Event listener for "Kost/nytte kalkulator"
 document.getElementById("Forlenget_amorteringstid_aar1").addEventListener("change", costCalculation);	
 document.getElementById("Forlenget_amorteringstid_aar2").addEventListener("change", costCalculation);
 document.getElementById("Forlenget_amorteringstid_lonebelop1").addEventListener("change", costCalculation);
@@ -253,6 +272,7 @@ function setProcent_fasade1time() {
 	
 // Calculation method for filling out fields based on inputs
 function simpleCalculation() {
+	// Calculation for rain
 	var Input_Tomt_Areal = document.getElementById("Input_Tomt_Areal").value;
 	var Input_oppsamlings_krav_1time = document.getElementById("Input_oppsamlings_krav_1time").value;
 	var Input_oppsamlings_krav_2time = document.getElementById("Input_oppsamlings_krav_2time").value;
@@ -293,7 +313,15 @@ function simpleCalculation() {
 	var Behov_antall_akvedukt = ( Oppsamlings_fasade_1time + Oppsamlings_fasade_2time) / Kapasitet_per_akvedukt;
 	//Global_Input_vektkalk_antallakveduktplantekasserfraovervann = Behov_antall_akvedukt;
 	document.getElementById("Output_behov_antall_akvedukt").value = Math.round(Behov_antall_akvedukt);
-}	
+	
+	rainCostCalculation();
+}
+	
+function rainCostCalculation() {
+	var Input_tilbud_res_resantall = document.getElementById("Input_tilbud_res_resantall").value;
+	var Input_tilbud_res_priseksmva = document.getElementById("Input_tilbud_res_priseksmva").value;
+	var Input_tilbud_res_delsum	= document.getElementById("Input_tilbud_res_delsum").value;
+}
 
 // Excel math-functions
 function PVIF(rate, nper) {
