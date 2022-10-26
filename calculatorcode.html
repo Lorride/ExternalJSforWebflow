@@ -381,6 +381,26 @@ function rainCostCalculation() {
 	//Total sum fasade and reservoir
 	var Output_tilbud_totalsum = parseInt(Output_tilbud_fas_sum) + parseInt(Output_tilbud_res_sum);
 	document.getElementById("Output_tilbud_totalsum").value = Output_tilbud_totalsum;
+	
+	//Vegetasjon takInput_vegetasjontak_antall
+	var Input_vegetasjontak_antall = document.getElementById("Input_vegetasjontak_antall").value;
+	var Input_vegetasjontak_sumetablering = document.getElementById("Input_vegetasjontak_sumetablering").value;
+	
+	var Output_vegetasjontak_sum = Math.round(Input_vegetasjontak_antall * Input_vegetasjontak_sumetablering);
+	document.getElementById("Output_vegetasjontak_sum").value = Output_vegetasjontak_sum;
+	
+	var Output_vegetasjontak_inktransport_sum = parseInt(Output_vegetasjontak_sum) + parseInt(10850);
+	document.getElementById("Output_vegetasjontak_inktransport_sum").value = Output_vegetasjontak_inktransport_sum;
+	
+	//Vegetasjon fasade
+	var Input_vegetasjonfas_antall = document.getElementById("Input_vegetasjonfas_antall").value;
+	var Input_vegetasjonfas_sumetablering = document.getElementById("Input_vegetasjonfas_sumetablering").value;
+	
+	var Output_vegetasjonfas_sum = Math.round(Input_vegetasjonfas_antall * Input_vegetasjonfas_sumetablering);
+	document.getElementById("Output_vegetasjonfas_sum").value = Output_vegetasjonfas_sum;
+	
+	var Output_vegetasjonfas_inktransport_sum = parseInt(Output_vegetasjonfas_sum) + parseInt(10850);
+	document.getElementById("Output_vegetasjonfas_inktransport_sum").value = Output_vegetasjonfas_inktransport_sum;
 }
 
 // Excel math-functions
