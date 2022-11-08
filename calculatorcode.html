@@ -150,13 +150,13 @@ document.getElementById("ESG_effekt_ordinaer_markedsverdi_resultat").value = 500
 
 // Setting inital values on page for "vektberegning"
 document.getElementById("Input_vektkalk_vannperakvedukt").value = 5.2;
-document.getElementById("Input_vektkalk_vaatjordkgperplantekasse").value = 11;
+document.getElementById("Input_vektkalk_vaatjordkgperplantekasse").value = 10.43;
 document.getElementById("Input_vektkalk_egenvektplatekasse").value = 1.7;
 document.getElementById("Input_vektkalk_egenvektakvedukt").value = 1.1;
 document.getElementById("Input_vektkalk_egenvektaludeksel").value = 1.0;
-document.getElementById("Output_vektkalk_totalvektinkvegetasjon").value = 19.9;
-document.getElementById("Input_vektkalk_antallakveduktplantekasserfraovervann").value = 233;
-document.getElementById("Output_vektkalk_sumvekt").value = 5;
+document.getElementById("Output_vektkalk_totalvektinkvegetasjon").value = 19.33;
+document.getElementById("Input_vektkalk_antallakveduktplantekasserfraovervann").value = 931;
+document.getElementById("Output_vektkalk_sumvekt").value = 17997;
 	
 	
 // -- States of inputs for "Behov/kapasitet" kalkulator" --
@@ -580,7 +580,7 @@ function weightCalculation() {
 	
 	var Input_vektkalk_antallakveduktplantekasserfraovervann = document.getElementById("Input_vektkalk_antallakveduktplantekasserfraovervann").value;
 		
-	var Output_vektkalk_sumvekt = Math.round((Input_vektkalk_antallakveduktplantekasserfraovervann * Output_vektkalk_totalvektinkvegetasjon) / 1000);
+	var Output_vektkalk_sumvekt = Math.round(Input_vektkalk_antallakveduktplantekasserfraovervann * Output_vektkalk_totalvektinkvegetasjon);
 	document.getElementById("Output_vektkalk_sumvekt").value = Output_vektkalk_sumvekt;
 }
 	
