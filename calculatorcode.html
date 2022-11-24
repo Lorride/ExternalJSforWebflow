@@ -630,7 +630,8 @@ function weightCalculation() {
     var Input_vektkalk_egenvekt_stortlokk_utendyrke = document.getElementById("Input_vektkalk_egenvekt_stortlokk_utendyrke").value;
     
     var Output_vektkalk_sum_vekt_lokk_utendyrke = (parseInt(Input_vektkalk_antall_litelokk_utendyrke) * parseInt(Input_vektkalk_egenvekt_litelokk_utendyrke)) + (parseInt(Input_vektkalk_antall_stortlokk_utendyrke) * parseInt(Input_vektkalk_egenvekt_stortlokk_utendyrke));
-    
+    document.getElementById("Output_vektkalk_sum_vekt_lokk_utendyrke").value = Output_vektkalk_sum_vekt_lokk_utendyrke;
+	
     var Output_vektkalk_total_vekt_ink_lokk_utendyrke = Output_vektkalk_sum_vekt_oppsamling_utendyrke + Output_vektkalk_sum_vekt_lokk_utendyrke;
     document.getElementById("Output_vektkalk_total_vekt_ink_lokk_utendyrke").value = Output_vektkalk_total_vekt_ink_lokk_utendyrke;
 	
