@@ -152,13 +152,13 @@ document.getElementById("ESG_effekt_ordinaer_markedsverdi_resultat").value = 500
 document.getElementById("Input_vektkalk_egenvektoppsamling_utendyrke").value = 12.0;
 document.getElementById("Input_vektkalk_vann_utendyrke").value = 81;
 document.getElementById("Input_vektkalk_antall_oppsamling_utendyrke").value = 86;
-document.getElementById("Output_vektkalk_sum_vekt_oppsamling_utendyrke").value = 8017;
+document.getElementById("Output_vektkalk_sum_vekt_oppsamling_utendyrke").value = 7998;
 document.getElementById("Input_vektkalk_antall_litelokk_utendyrke").value = 0.0;
 document.getElementById("Input_vektkalk_egenvekt_litelokk_utendyrke").value = 0.4;
 document.getElementById("Input_vektkalk_antall_stortlokk_utendyrke").value = 0.0;
 document.getElementById("Input_vektkalk_egenvekt_stortlokk_utendyrke").value = 1.2;
 document.getElementById("Output_vektkalk_sum_vekt_lokk_utendyrke").value = 0.0;
-document.getElementById("Output_vektkalk_total_vekt_ink_lokk_utendyrke").value = 8017;
+document.getElementById("Output_vektkalk_total_vekt_ink_lokk_utendyrke").value = 7998;
 
 document.getElementById("Input_vektkalk_vann_meddyrke").value = 81;
 document.getElementById("Input_vektkalk_vaatjord_meddyrke").value = 38.4;
@@ -622,7 +622,7 @@ function weightCalculation() {
     var Input_vektkalk_antall_oppsamling_utendyrke = document.getElementById("Input_vektkalk_antall_oppsamling_utendyrke").value;
     
     var Output_vektkalk_sum_vekt_oppsamling_utendyrke = (parseFloat(Input_vektkalk_egenvektoppsamling_utendyrke) + parseFloat(Input_vektkalk_vann_utendyrke)) * parseFloat(Input_vektkalk_antall_oppsamling_utendyrke);
-    document.getElementById("Output_vektkalk_sum_vekt_oppsamling_utendyrke").value = Output_vektkalk_sum_vekt_oppsamling_utendyrke;
+    document.getElementById("Output_vektkalk_sum_vekt_oppsamling_utendyrke").value = Math.round(Output_vektkalk_sum_vekt_oppsamling_utendyrke);
     
     var Input_vektkalk_antall_litelokk_utendyrke = document.getElementById("Input_vektkalk_antall_litelokk_utendyrke").value;
     var Input_vektkalk_egenvekt_litelokk_utendyrke = document.getElementById("Input_vektkalk_egenvekt_litelokk_utendyrke").value;
@@ -630,10 +630,10 @@ function weightCalculation() {
     var Input_vektkalk_egenvekt_stortlokk_utendyrke = document.getElementById("Input_vektkalk_egenvekt_stortlokk_utendyrke").value;
     
     var Output_vektkalk_sum_vekt_lokk_utendyrke = (parseFloat(Input_vektkalk_antall_litelokk_utendyrke) * parseFloat(Input_vektkalk_egenvekt_litelokk_utendyrke)) + (parseFloat(Input_vektkalk_antall_stortlokk_utendyrke) * parseFloat(Input_vektkalk_egenvekt_stortlokk_utendyrke));
-    document.getElementById("Output_vektkalk_sum_vekt_lokk_utendyrke").value = Output_vektkalk_sum_vekt_lokk_utendyrke;
+    document.getElementById("Output_vektkalk_sum_vekt_lokk_utendyrke").value = Math.round(Output_vektkalk_sum_vekt_lokk_utendyrke);
 	
     var Output_vektkalk_total_vekt_ink_lokk_utendyrke = parseFloat(Output_vektkalk_sum_vekt_oppsamling_utendyrke) + parseFloat(Output_vektkalk_sum_vekt_lokk_utendyrke);
-    document.getElementById("Output_vektkalk_total_vekt_ink_lokk_utendyrke").value = Output_vektkalk_total_vekt_ink_lokk_utendyrke;
+    document.getElementById("Output_vektkalk_total_vekt_ink_lokk_utendyrke").value = Math.round(Output_vektkalk_total_vekt_ink_lokk_utendyrke);
 	
 	// Med dyrke-kasser
 	
