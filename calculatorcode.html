@@ -636,8 +636,32 @@ function weightCalculation() {
     document.getElementById("Output_vektkalk_total_vekt_ink_lokk_utendyrke").value = Math.round(Output_vektkalk_total_vekt_ink_lokk_utendyrke);
 	
 	// Med dyrke-kasser
-	
-	
+	var Input_vektkalk_vann_meddyrke = document.getElementById("Input_vektkalk_vann_meddyrke").value;
+    var Input_vektkalk_vaatjord_meddyrke = document.getElementById("Input_vektkalk_vaatjord_meddyrke").value;
+    var Input_vektkalk_egenvektoppsamling_meddyrke = document.getElementById("Input_vektkalk_egenvektoppsamling_meddyrke").value;
+    var Input_vektkalk_egenvekt_dyrkekasse_meddyrke = document.getElementById("Input_vektkalk_egenvekt_dyrkekasse_meddyrke").value;
+    var Input_vektkalk_anslag_vekt_planter_meddyrke = document.getElementById("Input_vektkalk_anslag_vekt_planter_meddyrke").value;
+    
+    var Output_vektkalk_total_vekt_ink_vegetasjon_meddyrke = (parseFloat(Input_vektkalk_vann_meddyrke) + parseFloat(Input_vektkalk_vaatjord_meddyrke) + parseFloat(Input_vektkalk_egenvektoppsamling_meddyrke) + parseFloat(Input_vektkalk_egenvekt_dyrkekasse_meddyrke) + parseFloat(Input_vektkalk_anslag_vekt_planter_meddyrke));
+    document.getElementById("Output_vektkalk_total_vekt_ink_vegetasjon_meddyrke").value = Math.round(Output_vektkalk_total_vekt_ink_vegetasjon_meddyrke);
+    
+    var Input_vektkalk_antall_litelokk_meddyrke = document.getElementById("Input_vektkalk_antall_litelokk_meddyrke").value;
+    var Input_vektkalk_egenvekt_litelokk_meddyrke = document.getElementById("Input_vektkalk_egenvekt_litelokk_meddyrke").value;
+    var Input_vektkalk_antall_stortlokk_meddyrke = document.getElementById("Input_vektkalk_antall_stortlokk_meddyrke").value;
+    var Input_vektkalk_egenvekt_stortlokk_meddyrke = document.getElementById("Input_vektkalk_egenvekt_stortlokk_meddyrke").value;
+    
+    var Output_vektkalk_sum_vekt_lokk_meddyrke = (parseFloat(Input_vektkalk_antall_litelokk_meddyrke) * parseFloat(Input_vektkalk_egenvekt_litelokk_meddyrke)) + (parseFloat(Input_vektkalk_antall_stortlokk_meddyrke) * parseFloat(Input_vektkalk_egenvekt_stortlokk_meddyrke));;
+    document.getElementById("Output_vektkalk_sum_vekt_lokk_meddyrke").value = Math.round(Output_vektkalk_sum_vekt_lokk_meddyrke);
+    
+    var Input_vektkalk_antall_dyrkekasser_meddyrke = document.getElementById("Input_vektkalk_antall_dyrkekasser_meddyrke").value;
+    var Input_vektkalk_antall_oppsamling_meddyrke = document.getElementById("Input_vektkalk_antall_oppsamling_meddyrke").value;
+    
+    var Output_vektkalk_sum_vekt_dyrkekasse_meddyrke = (parseFloat(Input_vektkalk_antall_dyrkekasser_meddyrke) * (parseFloat(Input_vektkalk_vaatjord_meddyrke) +  parseFloat(Input_vektkalk_egenvekt_dyrkekasse_meddyrke))) + (parseFloat(Input_vektkalk_antall_dyrkekasser_meddyrke) * parseFloat(Input_vektkalk_anslag_vekt_planter_meddyrke));
+    document.getElementById("Output_vektkalk_sum_vekt_dyrkekasse_meddyrke").value = Math.round(Output_vektkalk_sum_vekt_dyrkekasse_meddyrke);
+    
+    var Output_vektkalk_sum_vekt_oppsamling_meddyrke = (parseFloat(Input_vektkalk_antall_oppsamling_meddyrke) * (parseFloat(Input_vektkalk_vann_meddyrke) + parseFloat(Input_vektkalk_egenvektoppsamling_meddyrke)));
+    document.getElementById("Output_vektkalk_sum_vekt_oppsamling_meddyrke").value = Math.round(Output_vektkalk_sum_vekt_oppsamling_meddyrke);
+		
 	// Fasade
 	var Input_vektkalk_vannperakvedukt = document.getElementById("Input_vektkalk_vannperakvedukt").value;
 	var Input_vektkalk_vaatjordkgperplantekasse = document.getElementById("Input_vektkalk_vaatjordkgperplantekasse").value;
