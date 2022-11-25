@@ -621,7 +621,7 @@ function weightCalculation() {
     var Input_vektkalk_vann_utendyrke = document.getElementById("Input_vektkalk_vann_utendyrke").value;
     var Input_vektkalk_antall_oppsamling_utendyrke = document.getElementById("Input_vektkalk_antall_oppsamling_utendyrke").value;
     
-    var Output_vektkalk_sum_vekt_oppsamling_utendyrke = (parseInt(Input_vektkalk_egenvektoppsamling_utendyrke) + parseInt(Input_vektkalk_vann_utendyrke)) * parseInt(Input_vektkalk_antall_oppsamling_utendyrke);
+    var Output_vektkalk_sum_vekt_oppsamling_utendyrke = (parseFloat(Input_vektkalk_egenvektoppsamling_utendyrke) + parseFloat(Input_vektkalk_vann_utendyrke)) * parseFloat(Input_vektkalk_antall_oppsamling_utendyrke);
     document.getElementById("Output_vektkalk_sum_vekt_oppsamling_utendyrke").value = Output_vektkalk_sum_vekt_oppsamling_utendyrke;
     
     var Input_vektkalk_antall_litelokk_utendyrke = document.getElementById("Input_vektkalk_antall_litelokk_utendyrke").value;
@@ -629,10 +629,10 @@ function weightCalculation() {
     var Input_vektkalk_antall_stortlokk_utendyrke = document.getElementById("Input_vektkalk_antall_stortlokk_utendyrke").value;
     var Input_vektkalk_egenvekt_stortlokk_utendyrke = document.getElementById("Input_vektkalk_egenvekt_stortlokk_utendyrke").value;
     
-    var Output_vektkalk_sum_vekt_lokk_utendyrke = (parseInt(Input_vektkalk_antall_litelokk_utendyrke) * parseInt(Input_vektkalk_egenvekt_litelokk_utendyrke)) + (parseInt(Input_vektkalk_antall_stortlokk_utendyrke) * parseInt(Input_vektkalk_egenvekt_stortlokk_utendyrke));
+    var Output_vektkalk_sum_vekt_lokk_utendyrke = (parseFloat(Input_vektkalk_antall_litelokk_utendyrke) * parseFloat(Input_vektkalk_egenvekt_litelokk_utendyrke)) + (parseFloat(Input_vektkalk_antall_stortlokk_utendyrke) * parseFloat(Input_vektkalk_egenvekt_stortlokk_utendyrke));
     document.getElementById("Output_vektkalk_sum_vekt_lokk_utendyrke").value = Output_vektkalk_sum_vekt_lokk_utendyrke;
 	
-    var Output_vektkalk_total_vekt_ink_lokk_utendyrke = parseInt(Output_vektkalk_sum_vekt_oppsamling_utendyrke) + parseInt(Output_vektkalk_sum_vekt_lokk_utendyrke);
+    var Output_vektkalk_total_vekt_ink_lokk_utendyrke = parseFloat(Output_vektkalk_sum_vekt_oppsamling_utendyrke) + parseFloat(Output_vektkalk_sum_vekt_lokk_utendyrke);
     document.getElementById("Output_vektkalk_total_vekt_ink_lokk_utendyrke").value = Output_vektkalk_total_vekt_ink_lokk_utendyrke;
 	
 	// Med dyrke-kasser
