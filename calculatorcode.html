@@ -659,7 +659,7 @@ function weightCalculation() {
     var Output_vektkalk_sum_vekt_dyrkekasse_meddyrke = (parseFloat(Input_vektkalk_antall_dyrkekasser_meddyrke) * (parseFloat(Input_vektkalk_vaatjord_meddyrke) +  parseFloat(Input_vektkalk_egenvekt_dyrkekasse_meddyrke))) + (parseFloat(Input_vektkalk_antall_dyrkekasser_meddyrke) * parseFloat(Input_vektkalk_anslag_vekt_planter_meddyrke));
     document.getElementById("Output_vektkalk_sum_vekt_dyrkekasse_meddyrke").value = Math.round(Output_vektkalk_sum_vekt_dyrkekasse_meddyrke);
     
-    var Output_vektkalk_sum_vekt_oppsamling_meddyrke = (parseFloat(Input_vektkalk_antall_oppsamling_meddyrke) * (parseFloat(Input_vektkalk_vann_meddyrke) + parseFloat(Input_vektkalk_egenvektoppsamling_meddyrke)));
+    var Output_vektkalk_sum_vekt_oppsamling_meddyrke = Output_vektkalk_sum_vekt_lokk_meddyrke + (parseFloat(Input_vektkalk_antall_oppsamling_meddyrke) * (parseFloat(Input_vektkalk_vann_meddyrke) + parseFloat(Input_vektkalk_egenvektoppsamling_meddyrke)));
     document.getElementById("Output_vektkalk_sum_vekt_oppsamling_meddyrke").value = Math.round(Output_vektkalk_sum_vekt_oppsamling_meddyrke);
 		
 	// Fasade
