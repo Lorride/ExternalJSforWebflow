@@ -320,7 +320,7 @@ function setProcent_fasade1time() {
 // Calculation method for filling out fields based on inputs
 function simpleCalculation() {
 	// Calculation for rain
-	var Input_Tomt_Areal = document.getElementById("Input_Tomt_Areal").value;
+	var Input_Tomt_Areal = 300;
 	var Input_oppsamlings_krav_1time = document.getElementById("Input_oppsamlings_krav_1time").value;
 	var Input_oppsamlings_krav_2time = document.getElementById("Input_oppsamlings_krav_2time").value;
 	var Oppsamlings_krav_1time = Input_Tomt_Areal * Input_oppsamlings_krav_1time;
@@ -328,6 +328,8 @@ function simpleCalculation() {
 	
 	document.getElementById("Output_oppsamlings_1time").value = Math.round(Oppsamlings_krav_1time);
 	document.getElementById("Output_oppsamlings_2time").value = Math.round(Oppsamlings_krav_2time);
+	// Ny kalkulator Element:
+	document.getElementById("OppsamlingsKrav").value = Math.round(Oppsamlings_krav_1time);
 	
 	var Input_pot_disp_per_sek_m2 = document.getElementById("Input_pot_disp_per_sek_m2").value / 1000;
 	var Liter_per_time_paaslipp = Input_Tomt_Areal * Input_pot_disp_per_sek_m2 * 3600;
