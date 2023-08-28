@@ -328,19 +328,15 @@ function doCalculationOnClick() {
 function simpleCalculation() {	
 	// Calculation for rain
 	var Input_Tomt_Areal = 300.0;
-	alert("Before reading first input");
-	var Input_oppsamlings_krav_1time = document.getElementById("Input_oppsamlings_krav_1time").value;
-	alert("After reading first input");
-	var Input_oppsamlings_krav_2time = document.getElementById("Input_oppsamlings_krav_2time").value;
+	var Input_oppsamlings_krav_1time = 50.0;
+	var Input_oppsamlings_krav_2time = 15.0;
 	var Oppsamlings_krav_1time = Input_Tomt_Areal * Input_oppsamlings_krav_1time;
 	var Oppsamlings_krav_2time = Input_Tomt_Areal * Input_oppsamlings_krav_2time;
 	
-	document.getElementById("Output_oppsamlings_1time").value = Math.round(Oppsamlings_krav_1time);
-	document.getElementById("Output_oppsamlings_2time").value = Math.round(Oppsamlings_krav_2time);
+	//document.getElementById("Output_oppsamlings_1time").value = Math.round(Oppsamlings_krav_1time);
+	//document.getElementById("Output_oppsamlings_2time").value = Math.round(Oppsamlings_krav_2time);
 	// Ny kalkulator Element:
-	alert("Before");
 	document.getElementById("oppsamlings_krav").innerHTML = Math.round(Oppsamlings_krav_1time) + " L";
-	alert("After");
 	
 	var Input_pot_disp_per_sek_m2 = document.getElementById("Input_pot_disp_per_sek_m2").value / 1000;
 	var Liter_per_time_paaslipp = Input_Tomt_Areal * Input_pot_disp_per_sek_m2 * 3600;
