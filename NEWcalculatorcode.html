@@ -335,42 +335,41 @@ function simpleCalculation() {
 
 	// Ny kalkulator Element:
 	document.getElementById("oppsamlings_krav").innerHTML = Math.round(Oppsamlings_krav_1time) + " L";
-	alert("-2");
+
 	var Input_pot_disp_per_sek_m2 = 2 / 1000;
 	var Liter_per_time_paaslipp = Input_Tomt_Areal * Input_pot_disp_per_sek_m2 * 3600;
 	//document.getElementById("Output_liter_per_time_paaslipp").value = Math.round(Liter_per_time_paaslipp);
-	alert("-1");
+
 	var Oppsamlings_behov_1time = Oppsamlings_krav_1time - Liter_per_time_paaslipp;
 	var Oppsamlings_behov_2time = Oppsamlings_krav_2time - Liter_per_time_paaslipp;
 	//document.getElementById("Output_oppsamlings_behov_1time").value = Math.round(Oppsamlings_behov_1time);
 	//document.getElementById("Output_oppsamlings_behov_2time").value = Math.round(Oppsamlings_behov_2time);
-	alert("0");
+
 	//Ny Kalkulator Element:
 	document.getElementById("Oppsamling_Forste_Time").innerHTML = Math.round(Oppsamlings_behov_1time) + " L";
 
-	alert("1");
 	var Time1_oppsamling_tak_procent = 100.0;
 	var Time1_oppsamling_fasade_procent = 0.0;
 	var Oppsamlings_tak_1time = (Time1_oppsamling_tak_procent / 100) * Oppsamlings_behov_1time;
 	var Oppsamlings_fasade_1time = (Time1_oppsamling_fasade_procent / 100) * Oppsamlings_behov_1time;
 	//document.getElementById("Output_oppsamlings_tak_1time").value = Math.round(Oppsamlings_tak_1time); 
 	//document.getElementById("Output_oppsamlings_fasade_1time").value = Math.round(Oppsamlings_fasade_1time);
-	alert("2");
+
 	var Time2_oppsamling_tak_procent = 100.0;	
 	var Time2_oppsamling_fasade_procent = 0.0;
 	var Oppsamlings_tak_2time = (Time2_oppsamling_tak_procent / 100) * Oppsamlings_behov_2time; 
 	var Oppsamlings_fasade_2time = (Time2_oppsamling_fasade_procent / 100) * Oppsamlings_behov_2time;
 	//document.getElementById("Output_oppsamlings_tak_2time").value = Math.round(Oppsamlings_tak_2time);
 	//document.getElementById("Output_oppsamlings_fasade_2time").value = Math.round(Oppsamlings_fasade_2time);			
-	alert("3");
+
 	var Kapasitet_per_oppsam_res = 81.0;
 	var Antall_oppsam_res = ( Oppsamlings_tak_1time + Oppsamlings_tak_2time ) / Kapasitet_per_oppsam_res;
 	//document.getElementById("Output_antall_oppsam_res").value = Math.round(Antall_oppsam_res);
-	alert("4");
+
 	var Kapasitet_per_akvedukt = 5.0;
 	var Behov_antall_akvedukt = ( Oppsamlings_fasade_1time + Oppsamlings_fasade_2time) / Kapasitet_per_akvedukt;
 	//document.getElementById("Output_behov_antall_akvedukt").value = Math.round(Behov_antall_akvedukt);
-	alert("5");
+
 	//Ny Kalkulator Element:
 	document.getElementById("AntallEcoDrainReservoar").innerHTML = Math.round(Antall_oppsam_res) + "x ECODRAIN-reservoar";
 	
