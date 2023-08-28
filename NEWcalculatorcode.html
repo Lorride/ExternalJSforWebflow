@@ -1,4 +1,6 @@
 <script>
+
+document.getElementById("oppsamlings_krav").onload = function() {doCalculationOnLoad()};
 	
 // Global variables for cross calculation between each calculators output
 //var Global_Input_vektkalk_antallakveduktplantekasserfraovervann = 0.0;
@@ -315,6 +317,11 @@ function setProcent_fasade1time() {
 
     // Calculate
     simpleCalculation();
+}
+
+function doCalculationOnLoad() {
+    // Calculate
+    simpleCalculation();	
 }
 	
 // Calculation method for filling out fields based on inputs
