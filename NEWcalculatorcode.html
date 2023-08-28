@@ -377,8 +377,12 @@ function simpleCalculation() {
 	var Behov_antall_akvedukt = ( Oppsamlings_fasade_1time + Oppsamlings_fasade_2time) / Kapasitet_per_akvedukt;
 	//document.getElementById("Output_behov_antall_akvedukt").value = Math.round(Behov_antall_akvedukt);
 
+	alert("before last element posting");
+	
 	//Ny Kalkulator Element:
 	document.getElementById("AntallEcoDrainReservoar").innerHTML = Math.round(Antall_oppsam_res) + "x ECODRAIN-reservoar";
+
+	alert("after last element posting");
 	
 	// Add result to other calculators input fields:
 	Input_tilbud_res_resantall = Math.round(Antall_oppsam_res);
@@ -386,6 +390,8 @@ function simpleCalculation() {
 	
 	Input_tilbud_fas_platekassevannreantal = Math.round(Behov_antall_akvedukt);
 	Input_vegetasjonfas_antall = Math.round(Behov_antall_akvedukt);
+
+	alert("before new function call");
 	
 	rainCostCalculation();
 }
