@@ -346,7 +346,7 @@ function simpleCalculation() {
 	//document.getElementById("Output_oppsamlings_behov_2time").value = Math.round(Oppsamlings_behov_2time);
 
 	//Ny Kalkulator Element:
-	document.getElementById("Oppsamling_Forste_Time").value = Oppsamlings_behov_1time + " L";
+	document.getElementById("Oppsamling_Forste_Time").innerHTML = Oppsamlings_behov_1time + " L";
 	
 	var Time1_oppsamling_tak_procent = 100.0;
 	var Time1_oppsamling_fasade_procent = 0.0;
@@ -371,7 +371,7 @@ function simpleCalculation() {
 	//document.getElementById("Output_behov_antall_akvedukt").value = Math.round(Behov_antall_akvedukt);
 	
 	//Ny Kalkulator Element:
-	document.getElementById("AntallEcoDrainReservoar").value = Math.round(Antall_oppsam_res) + "x ECODRAIN-reservoar";
+	document.getElementById("AntallEcoDrainReservoar").innerHTML = Math.round(Antall_oppsam_res) + "x ECODRAIN-reservoar";
 	
 	// Add result to other calculators input fields:
 	document.getElementById("Input_tilbud_res_resantall").value = Math.round(Antall_oppsam_res);
