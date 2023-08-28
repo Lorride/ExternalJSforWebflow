@@ -3,11 +3,11 @@
 var version = "1.0.1";
 	
 //Nye kalkulator variabler:	
-var Input_tilbud_res_resantall = 0.0;
+/*var Input_tilbud_res_resantall = 0.0;
 var Input_tilbud_res_storelokkantall = 0.0;
 	
 var Input_tilbud_fas_platekassevannreantal = 0.0;
-var Input_vegetasjonfas_antall = 0.0;
+var Input_vegetasjonfas_antall = 0.0;*/
 
 document.getElementById("ContactNowButton").addEventListener("click", doCalculationOnClick);	
 	
@@ -389,11 +389,11 @@ function simpleCalculation() {
 	alert("after last element posting");
 	
 	// Add result to other calculators input fields:
-	Input_tilbud_res_resantall = Math.round(Antall_oppsam_res);
-	Input_tilbud_res_storelokkantall = Math.round(Antall_oppsam_res);
+	var Input_tilbud_res_resantall = Math.round(Antall_oppsam_res);
+	var Input_tilbud_res_storelokkantall = Math.round(Antall_oppsam_res);
 	
-	Input_tilbud_fas_platekassevannreantal = Math.round(Behov_antall_akvedukt);
-	Input_vegetasjonfas_antall = Math.round(Behov_antall_akvedukt);
+	var Input_tilbud_fas_platekassevannreantal = Math.round(Behov_antall_akvedukt);
+	var Input_vegetasjonfas_antall = Math.round(Behov_antall_akvedukt);
 
 	alert("before new function call");
 	
