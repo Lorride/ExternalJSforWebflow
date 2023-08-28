@@ -1,0 +1,681 @@
+<script>
+	
+// Global variables for cross calculation between each calculators output
+//var Global_Input_vektkalk_antallakveduktplantekasserfraovervann = 0.0;
+
+// Setting inital values on page for "Behov/kapasitet kalkulator"
+document.getElementById("Input_oppsamlings_krav_1time").value = 50;
+document.getElementById("Input_oppsamlings_krav_2time").value = 15;
+document.getElementById("Input_pot_disp_per_sek_m2").value = 2;
+
+document.getElementById("Input_oppsamlings_tak_1time").value = 60;
+document.getElementById("Input_oppsamlings_fasade_1time").value = 40;
+document.getElementById("Input_oppsamlings_tak_2time").value = 60;
+document.getElementById("Input_oppsamlings_fasade_2time").value = 40;
+
+document.getElementById("Output_kapasitet_per_oppsam_res").value = 81;
+document.getElementById("Output_kapasitet_per_akvedukt").value = 5;
+
+// -- Setting inital values for offer after "Behov kapasitet kalkulator"
+document.getElementById("Input_tilbud_res_resantall").value = 129;
+document.getElementById("Input_tilbud_res_priseksmva").value = 1294;
+document.getElementById("Input_tilbud_res_delsum").value = 167296;
+document.getElementById("Input_tilbud_res_storelokkantall").value = 129;
+document.getElementById("Input_tilbud_res_storelokkpriseksmva").value = 844;
+document.getElementById("Input_tilbud_res_storelokkdelsum").value = 109106;
+document.getElementById("Input_tilbud_res_dyrkekasseantall").value = 172;
+document.getElementById("Input_tilbud_res_dyrkekassepriseksmva").value = 844;
+document.getElementById("Input_tilbud_res_dyrkekassedelsum").value = 145125;
+document.getElementById("Input_tilbud_res_smaalokkantall").value = 86;
+document.getElementById("Input_tilbud_res_smaalokkpriseksmva").value = 394;
+document.getElementById("Input_tilbud_res_smaalokkdelsum").value = 33884;
+document.getElementById("Output_tilbud_res_summaterialkost").value = 455412;
+document.getElementById("Input_tilbud_res_monteringprosent").value = 25;
+document.getElementById("Input_tilbud_res_monteringsum").value = 113853;
+document.getElementById("Output_tilbud_res_sum").value = 569264;
+
+document.getElementById("Input_tilbud_fas_platekassevannreantall").value = 233;
+document.getElementById("Input_tilbud_fas_platekassevannrepriseksmva").value = 480;
+document.getElementById("Input_tilbud_fas_platekassevannredelsum").value = 111725;
+document.getElementById("Output_tilbud_fas_summaterialkost").value = 111725;
+document.getElementById("Input_tilbud_fas_monteringprosent").value = 25;
+document.getElementById("Input_tilbud_fas_monteringsum").value = 27931;
+document.getElementById("Output_tilbud_fas_sum").value = 139656;
+
+document.getElementById("Output_tilbud_totalsum").value = 708920;
+
+document.getElementById("Input_vegetasjontak_antall").value = 172;
+document.getElementById("Input_vegetasjontak_sumetablering").value = 355;
+document.getElementById("Output_vegetasjontak_sum").value = 61077;
+document.getElementById("Output_vegetasjontak_inktransport_sum").value = 71927;
+
+document.getElementById("Input_vegetasjonfas_antall").value = 233;
+document.getElementById("Input_vegetasjonfas_sumetablering").value = 230;
+document.getElementById("Output_vegetasjonfas_sum").value = 53488;
+document.getElementById("Output_vegetasjonfas_inktransport_sum").value = 64338;
+
+// Setting inital values on page for "Kost/nytte kalkulator"
+
+// -- Forlenget Amorteringstid --
+document.getElementById("Forlenget_amorteringstid_aar1").value = 25;
+document.getElementById("Forlenget_amorteringstid_aar2").value = 30;
+
+document.getElementById("Forlenget_amorteringstid_lonebelop1").value = 100000000;
+document.getElementById("Forlenget_amorteringstid_lonebelop2").value = 100000000;
+
+document.getElementById("Forlenget_amorteringstid_procent1").value = 5;
+document.getElementById("Forlenget_amorteringstid_procent2").value = 5;
+
+document.getElementById("Forlenget_amorteringstid_rentekost1").value = 5000000;
+document.getElementById("Forlenget_amorteringstid_rentekost2").value = 5000000;
+
+document.getElementById("Forlenget_amorteringstid_renteavdrag1").value = 6757377;
+document.getElementById("Forlenget_amorteringstid_renteavdrag2").value = 6195375;
+
+document.getElementById("Forlenget_amorteringstid_bedret_likviditet").value = 562002;
+
+// -- Besparelse Lonerente --
+document.getElementById("Besparelse_lonerente_lonebelop").value = 100000000;
+document.getElementById("Besparelse_lonerente_procent").value = 0.25;
+document.getElementById("Besparelse_lonerente_resultat").value = 250000;
+
+// -- Bærekraftig bygning; attraktivitet som utleieobjekt --
+//Anslag,  økte leieinntekter
+document.getElementById("Anslag_okte_leieinntekter_leieinntekter").value = 5000000;
+document.getElementById("Anslag_okte_leieinntekter_procent").value = 5;
+document.getElementById("Anslag_okte_leieinntekter_resultat").value = 250000;
+
+//Overvannshåndteringssystem
+document.getElementById("Overvannshandteringssystem_fullverdi_sum").value =  100000000;
+document.getElementById("Overvannshandteringssystem_forsikringspremie_procent").value = 0.05;
+document.getElementById("Overvannshandteringssystem_forsikringspremie_delresultat").value = 50000;
+
+document.getElementById("Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent").value = 10;
+document.getElementById("Overvannshandteringssystem_forsikringspremie_besparelse").value = 5000;
+	
+// -- Bærekraftig bygning; fangst av klimagasser mv --
+//Differensiert eiendomsskatt
+document.getElementById("Differensiert_eiendomsskatt_skattegrunnlag").value = 70000000;
+document.getElementById("Differensiert_eiendomsskatt_skattesatsprocent1").value = 0.4;
+document.getElementById("Differensiert_eiendomsskatt_skattesatsprocent2").value = 0.2;
+document.getElementById("Differensiert_eiendomsskatt_eiendomsskatt1").value = 280000;
+document.getElementById("Differensiert_eiendomsskatt_eiendomsskatt2").value = 140000;
+document.getElementById("Differensiert_eiendomsskatt_resultat").value = 140000;
+	
+//Årsgebyr for avløp, fordelt på spillvann og overvann
+document.getElementById("Aarsgebyr_for_avlop_vann_kvmbruksareal").value = 100;
+document.getElementById("Aarsgebyr_for_avlop_vann_antattforbrukperkvm").value = 1.3;
+document.getElementById("Aarsgebyr_for_avlop_vann_prisforbrukperkvm").value = 16.77;
+document.getElementById("Aarsgebyr_for_avlop_vann_sumgebyr").value = 2180;
+
+document.getElementById("Aarsgebyr_for_avlop_avlop_kvmbruksareal").value = 100;
+document.getElementById("Aarsgebyr_for_avlop_avlop_antattforbrukperkvm").value = 1.3;
+document.getElementById("Aarsgebyr_for_avlop_avlop_prisforbrukperkvm").value = 16.77;
+document.getElementById("Aarsgebyr_for_avlop_avlop_sumgebyr").value = 2180;
+
+document.getElementById("Aarsgebyr_for_avlop_abonnementsgebyr").value = 423;
+document.getElementById("Aarsgebyr_for_avlop_totaltvannogavlopsgebyr").value = 5979;
+document.getElementById("Aarsgebyr_for_avlop_vannmaalergebyrperaar").value = 2720;
+document.getElementById("Aarsgebyr_for_avlop_totalt").value = 8699;
+	
+//-- Sum driftsresultat-forbedringer --
+document.getElementById("Sum_driftsresultat_forbedringer").value = 645000;
+	
+// -- Kostnader, vedlikehold/planteskjøtsel --
+document.getElementById("Kostnader_vedlikehold_planteskjotsel").value = 200000;	
+
+// -- Forbedret driftsresultat før leiekostnader -- 
+document.getElementById("Forbedret_driftsresultat_foer_leiekostnader").value = 445000;
+	
+// -- Langsiktig årlig leie av GROW UP!-anlegg --	
+document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_aar").value = 8;
+document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep").value = 2000000;
+document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_rente").value = 8;
+document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_resultat").value = 322250;
+	
+// -- Forbedret driftsresultat etter leiekostnader --
+document.getElementById("Forbedret_driftsresultat_etter_leiekostnader").value = 122750;
+	
+// -- Differanse_amortering --
+document.getElementById("Differanse_amortering").value = 562002;
+	
+// -- Sum resultat- og likviditetsforbedring (før skatt) --
+document.getElementById("Sum_resultat_likviditetsforbedring_foer_skatt").value = 684753;
+	
+// -- "ESG"-effekt av ordinær markedsverdi --
+document.getElementById("ESG_effekt_ordinaer_markedsverdi").value = 100000000;
+document.getElementById("ESG_effekt_ordinaer_markedsverdi_i_percent").value = 5;
+document.getElementById("ESG_effekt_ordinaer_markedsverdi_resultat").value = 5000000;
+
+
+// Setting inital values on page for "vektberegning"
+document.getElementById("Input_vektkalk_egenvektoppsamling_utendyrke").value = 12.0;
+document.getElementById("Input_vektkalk_vann_utendyrke").value = 81;
+document.getElementById("Input_vektkalk_antall_oppsamling_utendyrke").value = 86;
+document.getElementById("Output_vektkalk_sum_vekt_oppsamling_utendyrke").value = 7998;
+document.getElementById("Input_vektkalk_antall_litelokk_utendyrke").value = 0.0;
+document.getElementById("Input_vektkalk_egenvekt_litelokk_utendyrke").value = 0.4;
+document.getElementById("Input_vektkalk_antall_stortlokk_utendyrke").value = 0.0;
+document.getElementById("Input_vektkalk_egenvekt_stortlokk_utendyrke").value = 1.2;
+document.getElementById("Output_vektkalk_sum_vekt_lokk_utendyrke").value = 0.0;
+document.getElementById("Output_vektkalk_total_vekt_ink_lokk_utendyrke").value = 7998;
+
+document.getElementById("Input_vektkalk_vann_meddyrke").value = 81;
+document.getElementById("Input_vektkalk_vaatjord_meddyrke").value = 38.4;
+document.getElementById("Input_vektkalk_egenvektoppsamling_meddyrke").value = 12;
+document.getElementById("Input_vektkalk_egenvekt_dyrkekasse_meddyrke").value = 8;
+document.getElementById("Input_vektkalk_anslag_vekt_planter_meddyrke").value = 7.5;
+document.getElementById("Output_vektkalk_total_vekt_ink_vegetasjon_meddyrke").value = 146.9;
+document.getElementById("Input_vektkalk_antall_litelokk_meddyrke").value = 0.0;
+document.getElementById("Input_vektkalk_egenvekt_litelokk_meddyrke").value = 0.4;
+document.getElementById("Input_vektkalk_antall_stortlokk_meddyrke").value = 0.0;
+document.getElementById("Input_vektkalk_egenvekt_stortlokk_meddyrke").value = 1.2;
+document.getElementById("Output_vektkalk_sum_vekt_lokk_meddyrke").value = 0.0;
+document.getElementById("Input_vektkalk_antall_dyrkekasser_meddyrke").value = 172;
+document.getElementById("Input_vektkalk_antall_oppsamling_meddyrke").value = 86;
+document.getElementById("Output_vektkalk_sum_vekt_dyrkekasse_meddyrke").value = 9271;
+document.getElementById("Output_vektkalk_sum_vekt_oppsamling_meddyrke").value = 7998;
+
+document.getElementById("Input_vektkalk_vannperakvedukt").value = 5.2;
+document.getElementById("Input_vektkalk_vaatjordkgperplantekasse").value = 10.43;
+document.getElementById("Input_vektkalk_egenvektplatekasse").value = 1.7;
+document.getElementById("Input_vektkalk_egenvektakvedukt").value = 1.1;
+document.getElementById("Input_vektkalk_egenvektaludeksel").value = 1.0;
+document.getElementById("Output_vektkalk_totalvektinkvegetasjon").value = 19.33;
+document.getElementById("Input_vektkalk_antallakveduktplantekasserfraovervann").value = 931;
+document.getElementById("Output_vektkalk_sumvekt").value = 17997;
+	
+	
+// -- States of inputs for "Behov/kapasitet" kalkulator" --
+	
+document.getElementById('Input_oppsamlings_tak_2time').setAttribute("readonly", "");
+document.getElementById('Input_oppsamlings_fasade_2time').setAttribute("readonly", "");
+	
+// -- Listeners --
+	
+// Event listener for changes in inputs for "Behov/kapasitet kalkulator"
+document.getElementById("Input_Tomt_Areal").addEventListener("change", simpleCalculation);
+document.getElementById("Input_oppsamlings_krav_1time").addEventListener("change", simpleCalculation);
+document.getElementById("Input_oppsamlings_krav_2time").addEventListener("change", simpleCalculation);
+document.getElementById("Input_pot_disp_per_sek_m2").addEventListener("change", simpleCalculation);
+document.getElementById("Input_oppsamlings_tak_1time").addEventListener("change", setProcent_tak1time);
+document.getElementById("Input_oppsamlings_fasade_1time").addEventListener("change", setProcent_fasade1time);
+	
+document.getElementById("Input_tilbud_res_resantall").addEventListener("change", rainCostCalculation);
+document.getElementById("Input_tilbud_res_priseksmva").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_storelokkantall").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_storelokkpriseksmva").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_dyrkekasseantall").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_dyrkekassepriseksmva").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_smaalokkantall").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_smaalokkpriseksmva").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_res_monteringprosent").addEventListener("change", rainCostCalculation); 
+
+document.getElementById("Input_tilbud_fas_platekassevannreantall").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_fas_platekassevannrepriseksmva").addEventListener("change", rainCostCalculation); 
+
+document.getElementById("Output_tilbud_fas_summaterialkost").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_tilbud_fas_monteringprosent").addEventListener("change", rainCostCalculation); 
+
+document.getElementById("Input_vegetasjontak_antall").addEventListener("change", rainCostCalculation); 
+document.getElementById("Input_vegetasjonfas_antall").addEventListener("change", rainCostCalculation); 
+	
+// Event listener for "Kost/nytte kalkulator"
+document.getElementById("Forlenget_amorteringstid_aar1").addEventListener("change", costCalculation);	
+document.getElementById("Forlenget_amorteringstid_aar2").addEventListener("change", costCalculation);
+document.getElementById("Forlenget_amorteringstid_lonebelop1").addEventListener("change", costCalculation);
+document.getElementById("Forlenget_amorteringstid_lonebelop2").addEventListener("change", costCalculation);
+document.getElementById("Forlenget_amorteringstid_procent1").addEventListener("change", costCalculation);
+document.getElementById("Forlenget_amorteringstid_procent2").addEventListener("change", costCalculation);
+document.getElementById("Besparelse_lonerente_lonebelop").addEventListener("change", costCalculation);
+document.getElementById("Besparelse_lonerente_procent").addEventListener("change", costCalculation);
+document.getElementById("Anslag_okte_leieinntekter_leieinntekter").addEventListener("change", costCalculation);
+document.getElementById("Anslag_okte_leieinntekter_procent").addEventListener("change", costCalculation);
+document.getElementById("Overvannshandteringssystem_fullverdi_sum").addEventListener("change", costCalculation);
+document.getElementById("Overvannshandteringssystem_forsikringspremie_procent").addEventListener("change", costCalculation);
+document.getElementById("Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent").addEventListener("change", costCalculation);
+document.getElementById("Differensiert_eiendomsskatt_skattegrunnlag").addEventListener("change", costCalculation);
+document.getElementById("Differensiert_eiendomsskatt_skattesatsprocent1").addEventListener("change", costCalculation);
+document.getElementById("Differensiert_eiendomsskatt_skattesatsprocent2").addEventListener("change", costCalculation);
+document.getElementById("Aarsgebyr_for_avlop_vann_kvmbruksareal").addEventListener("change", costCalculation);
+document.getElementById("Aarsgebyr_for_avlop_avlop_kvmbruksareal").addEventListener("change", costCalculation);
+document.getElementById("Aarsgebyr_for_avlop_vann_antattforbrukperkvm").addEventListener("change", costCalculation);
+document.getElementById("Aarsgebyr_for_avlop_avlop_antattforbrukperkvm").addEventListener("change", costCalculation);
+document.getElementById("Aarsgebyr_for_avlop_vann_prisforbrukperkvm").addEventListener("change", costCalculation);
+document.getElementById("Aarsgebyr_for_avlop_avlop_prisforbrukperkvm").addEventListener("change", costCalculation);
+document.getElementById("Aarsgebyr_for_avlop_abonnementsgebyr").addEventListener("change", costCalculation);
+document.getElementById("Aarsgebyr_for_avlop_vannmaalergebyrperaar").addEventListener("change", costCalculation);
+document.getElementById("Kostnader_vedlikehold_planteskjotsel").addEventListener("change", costCalculation);
+document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_aar").addEventListener("change", costCalculation);
+document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep").addEventListener("change", costCalculation);
+document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_rente").addEventListener("change", costCalculation);
+document.getElementById("ESG_effekt_ordinaer_markedsverdi").addEventListener("change", costCalculation);
+document.getElementById("ESG_effekt_ordinaer_markedsverdi_i_percent").addEventListener("change", costCalculation);
+
+// Event listener for calculate button for "Vektberegning"
+document.getElementById("Input_vektkalk_egenvektoppsamling_utendyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_vann_utendyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_antall_oppsamling_utendyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_antall_litelokk_utendyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvekt_litelokk_utendyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_antall_stortlokk_utendyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvekt_stortlokk_utendyrke").addEventListener("change", weightCalculation);
+
+document.getElementById("Input_vektkalk_vann_meddyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_vaatjord_meddyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvektoppsamling_meddyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvekt_dyrkekasse_meddyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_anslag_vekt_planter_meddyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_antall_litelokk_meddyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvekt_litelokk_meddyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_antall_stortlokk_meddyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvekt_stortlokk_meddyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_antall_dyrkekasser_meddyrke").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_antall_oppsamling_meddyrke").addEventListener("change", weightCalculation);
+
+document.getElementById("Input_vektkalk_vannperakvedukt").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_vaatjordkgperplantekasse").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvektplatekasse").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvektakvedukt").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_egenvektaludeksel").addEventListener("change", weightCalculation);
+document.getElementById("Input_vektkalk_antallakveduktplantekasserfraovervann").addEventListener("change", weightCalculation);
+	
+// -- Methods --
+
+// Calculation method for automatically setting procent in inputs based on user input and checkbox state
+function setProcent_tak1time() {		
+    if ( document.getElementById("Checkbox").checked === false ) {
+        if ( document.getElementById("Input_oppsamlings_tak_1time").value >= 100 ) {
+            document.getElementById("Input_oppsamlings_tak_1time").value = 100;
+            document.getElementById("Input_oppsamlings_fasade_1time").value = 0;
+        } else {
+            document.getElementById("Input_oppsamlings_fasade_1time").value = 100 - document.getElementById("Input_oppsamlings_tak_1time").value;   
+        }
+    }
+
+    document.getElementById("Input_oppsamlings_tak_2time").value = document.getElementById("Input_oppsamlings_tak_1time").value;
+    document.getElementById("Input_oppsamlings_fasade_2time").value = document.getElementById("Input_oppsamlings_fasade_1time").value;
+
+    // Calculate
+    simpleCalculation();
+}
+
+function setProcent_fasade1time() {
+    if ( document.getElementById("Checkbox").checked === false ) {
+        if (document.getElementById("Input_oppsamlings_fasade_1time").value >= 100) {
+            document.getElementById("Input_oppsamlings_fasade_1time").value = 100; 
+            document.getElementById("Input_oppsamlings_tak_1time").value = 0;                   
+        } else {
+            document.getElementById("Input_oppsamlings_tak_1time").value = 100 - document.getElementById("Input_oppsamlings_fasade_1time").value;   
+        }
+    }
+ 
+    document.getElementById("Input_oppsamlings_tak_2time").value = document.getElementById("Input_oppsamlings_tak_1time").value;
+    document.getElementById("Input_oppsamlings_fasade_2time").value = document.getElementById("Input_oppsamlings_fasade_1time").value;
+
+    // Calculate
+    simpleCalculation();
+}
+	
+// Calculation method for filling out fields based on inputs
+function simpleCalculation() {
+	// Calculation for rain
+	var Input_Tomt_Areal = document.getElementById("Input_Tomt_Areal").value;
+	var Input_oppsamlings_krav_1time = document.getElementById("Input_oppsamlings_krav_1time").value;
+	var Input_oppsamlings_krav_2time = document.getElementById("Input_oppsamlings_krav_2time").value;
+	var Oppsamlings_krav_1time = Input_Tomt_Areal * Input_oppsamlings_krav_1time;
+	var Oppsamlings_krav_2time = Input_Tomt_Areal * Input_oppsamlings_krav_2time;
+	
+	document.getElementById("Output_oppsamlings_1time").value = Math.round(Oppsamlings_krav_1time);
+	document.getElementById("Output_oppsamlings_2time").value = Math.round(Oppsamlings_krav_2time);
+	
+	var Input_pot_disp_per_sek_m2 = document.getElementById("Input_pot_disp_per_sek_m2").value / 1000;
+	var Liter_per_time_paaslipp = Input_Tomt_Areal * Input_pot_disp_per_sek_m2 * 3600;
+	document.getElementById("Output_liter_per_time_paaslipp").value = Math.round(Liter_per_time_paaslipp);
+	
+	var Oppsamlings_behov_1time = Oppsamlings_krav_1time - Liter_per_time_paaslipp;
+	var Oppsamlings_behov_2time = Oppsamlings_krav_2time - Liter_per_time_paaslipp;
+	document.getElementById("Output_oppsamlings_behov_1time").value = Math.round(Oppsamlings_behov_1time);
+	document.getElementById("Output_oppsamlings_behov_2time").value = Math.round(Oppsamlings_behov_2time);
+	
+	var Time1_oppsamling_tak_procent = 	document.getElementById("Input_oppsamlings_tak_1time").value;
+	var Time1_oppsamling_fasade_procent = document.getElementById("Input_oppsamlings_fasade_1time").value;
+	var Oppsamlings_tak_1time = (Time1_oppsamling_tak_procent / 100) * Oppsamlings_behov_1time;
+	var Oppsamlings_fasade_1time = (Time1_oppsamling_fasade_procent / 100) * Oppsamlings_behov_1time;
+	document.getElementById("Output_oppsamlings_tak_1time").value = Math.round(Oppsamlings_tak_1time); 
+	document.getElementById("Output_oppsamlings_fasade_1time").value = Math.round(Oppsamlings_fasade_1time);
+	
+	var Time2_oppsamling_tak_procent = document.getElementById("Input_oppsamlings_tak_2time").value;	
+	var Time2_oppsamling_fasade_procent = document.getElementById("Input_oppsamlings_fasade_2time").value;
+	var Oppsamlings_tak_2time = (Time2_oppsamling_tak_procent / 100) * Oppsamlings_behov_2time; 
+	var Oppsamlings_fasade_2time = (Time2_oppsamling_fasade_procent / 100) * Oppsamlings_behov_2time;
+	document.getElementById("Output_oppsamlings_tak_2time").value = Math.round(Oppsamlings_tak_2time);
+	document.getElementById("Output_oppsamlings_fasade_2time").value = Math.round(Oppsamlings_fasade_2time);			
+	
+	var Kapasitet_per_oppsam_res = document.getElementById("Output_kapasitet_per_oppsam_res").value;
+	var Antall_oppsam_res = ( Oppsamlings_tak_1time + Oppsamlings_tak_2time ) / Kapasitet_per_oppsam_res;
+	document.getElementById("Output_antall_oppsam_res").value = Math.round(Antall_oppsam_res);
+	
+	var Kapasitet_per_akvedukt = document.getElementById("Output_kapasitet_per_akvedukt").value;
+	var Behov_antall_akvedukt = ( Oppsamlings_fasade_1time + Oppsamlings_fasade_2time) / Kapasitet_per_akvedukt;
+	document.getElementById("Output_behov_antall_akvedukt").value = Math.round(Behov_antall_akvedukt);
+	
+	// Add result to other calculators input fields:
+	document.getElementById("Input_tilbud_res_resantall").value = Math.round(Antall_oppsam_res);
+	document.getElementById("Input_tilbud_res_storelokkantall").value = Math.round(Antall_oppsam_res);
+	
+	document.getElementById("Input_tilbud_fas_platekassevannreantall").value = Math.round(Behov_antall_akvedukt);
+	document.getElementById("Input_vegetasjonfas_antall").value = Math.round(Behov_antall_akvedukt);
+	
+	rainCostCalculation();
+}
+	
+function rainCostCalculation() {
+	// Reservoir
+	var Input_tilbud_res_resantall = document.getElementById("Input_tilbud_res_resantall").value;
+	var Input_tilbud_res_priseksmva = document.getElementById("Input_tilbud_res_priseksmva").value;
+	
+	var Input_tilbud_res_delsum = Math.round(parseInt(Input_tilbud_res_resantall) * parseInt(Input_tilbud_res_priseksmva));
+	document.getElementById("Input_tilbud_res_delsum").value = Input_tilbud_res_delsum;
+
+	var Input_tilbud_res_storelokkantall = document.getElementById("Input_tilbud_res_storelokkantall").value;
+	var Input_tilbud_res_storelokkpriseksmva = document.getElementById("Input_tilbud_res_storelokkpriseksmva").value;
+	
+	var Input_tilbud_res_storelokkdelsum = Math.round(parseInt(Input_tilbud_res_storelokkantall) * parseInt(Input_tilbud_res_storelokkpriseksmva));
+	document.getElementById("Input_tilbud_res_storelokkdelsum").value = Input_tilbud_res_storelokkdelsum;
+	
+	var Input_tilbud_res_dyrkekasseantall = document.getElementById("Input_tilbud_res_dyrkekasseantall").value;
+	var Input_tilbud_res_dyrkekassepriseksmva = document.getElementById("Input_tilbud_res_dyrkekassepriseksmva").value;
+	
+	var Input_tilbud_res_dyrkekassedelsum = Math.round(parseInt(Input_tilbud_res_dyrkekasseantall) * parseInt(Input_tilbud_res_dyrkekassepriseksmva));
+	document.getElementById("Input_tilbud_res_dyrkekassedelsum").value = Input_tilbud_res_dyrkekassedelsum;
+	
+	var Input_tilbud_res_smaalokkantall = document.getElementById("Input_tilbud_res_smaalokkantall").value;
+	var Input_tilbud_res_smaalokkpriseksmva = document.getElementById("Input_tilbud_res_smaalokkpriseksmva").value;
+	
+	var Input_tilbud_res_smaalokkdelsum = Math.round(parseInt(Input_tilbud_res_smaalokkantall) * parseInt(Input_tilbud_res_smaalokkpriseksmva));
+	document.getElementById("Input_tilbud_res_smaalokkdelsum").value = Input_tilbud_res_smaalokkdelsum;
+	
+	var Output_tilbud_res_summaterialkost = parseInt(Input_tilbud_res_delsum) + parseInt(Input_tilbud_res_storelokkdelsum) + parseInt(Input_tilbud_res_dyrkekassedelsum) + parseInt(Input_tilbud_res_smaalokkdelsum);
+	document.getElementById("Output_tilbud_res_summaterialkost").value = Output_tilbud_res_summaterialkost;
+	
+	var Input_tilbud_res_monteringprosent = (document.getElementById("Input_tilbud_res_monteringprosent").value / 100);
+	var Input_tilbud_res_monteringsum = Math.round(Input_tilbud_res_monteringprosent * Output_tilbud_res_summaterialkost);
+	document.getElementById("Input_tilbud_res_monteringsum").value = Input_tilbud_res_monteringsum;
+	
+	//Sum reservoir
+	var Output_tilbud_res_sum = parseInt(Output_tilbud_res_summaterialkost) + parseInt(Input_tilbud_res_monteringsum);
+	document.getElementById("Output_tilbud_res_sum").value = Output_tilbud_res_sum;
+	
+	//Fasade	
+	var Input_tilbud_fas_platekassevannreantall = document.getElementById("Input_tilbud_fas_platekassevannreantall").value;
+	var Input_tilbud_fas_platekassevannrepriseksmva = document.getElementById("Input_tilbud_fas_platekassevannrepriseksmva").value;
+	
+	var Input_tilbud_fas_platekassevannredelsum = Math.round(parseInt(Input_tilbud_fas_platekassevannreantall) * parseInt(Input_tilbud_fas_platekassevannrepriseksmva));
+	document.getElementById("Input_tilbud_fas_platekassevannredelsum").value = Input_tilbud_fas_platekassevannredelsum;
+	
+	var Output_tilbud_fas_summaterialkost = Input_tilbud_fas_platekassevannredelsum;
+	document.getElementById("Output_tilbud_fas_summaterialkost").value = Output_tilbud_fas_summaterialkost;
+	
+	var Input_tilbud_fas_monteringprosent = (document.getElementById("Input_tilbud_fas_monteringprosent").value / 100);
+	var Input_tilbud_fas_monteringsum = Math.round(Input_tilbud_fas_monteringprosent * Output_tilbud_fas_summaterialkost);
+	document.getElementById("Input_tilbud_fas_monteringsum").value = Input_tilbud_fas_monteringsum;
+	
+	//Sum fasade
+	var Output_tilbud_fas_sum = parseInt(Output_tilbud_fas_summaterialkost) + parseInt(Input_tilbud_fas_monteringsum);
+	document.getElementById("Output_tilbud_fas_sum").value = Output_tilbud_fas_sum;
+	
+	//Total sum fasade and reservoir
+	var Output_tilbud_totalsum = parseInt(Output_tilbud_fas_sum) + parseInt(Output_tilbud_res_sum);
+	document.getElementById("Output_tilbud_totalsum").value = Output_tilbud_totalsum;
+	
+	//Vegetasjon takInput_vegetasjontak_antall
+	var Input_vegetasjontak_antall = document.getElementById("Input_vegetasjontak_antall").value;
+	var Input_vegetasjontak_sumetablering = document.getElementById("Input_vegetasjontak_sumetablering").value;
+	
+	var Output_vegetasjontak_sum = Math.round(Input_vegetasjontak_antall * Input_vegetasjontak_sumetablering);
+	document.getElementById("Output_vegetasjontak_sum").value = Output_vegetasjontak_sum;
+	
+	var Output_vegetasjontak_inktransport_sum = parseInt(Output_vegetasjontak_sum) + parseInt(10850);
+	document.getElementById("Output_vegetasjontak_inktransport_sum").value = Output_vegetasjontak_inktransport_sum;
+	
+	//Vegetasjon fasade
+	var Input_vegetasjonfas_antall = document.getElementById("Input_vegetasjonfas_antall").value;
+	var Input_vegetasjonfas_sumetablering = document.getElementById("Input_vegetasjonfas_sumetablering").value;
+	
+	var Output_vegetasjonfas_sum = Math.round(Input_vegetasjonfas_antall * Input_vegetasjonfas_sumetablering);
+	document.getElementById("Output_vegetasjonfas_sum").value = Output_vegetasjonfas_sum;
+	
+	var Output_vegetasjonfas_inktransport_sum = parseInt(Output_vegetasjonfas_sum) + parseInt(10850);
+	document.getElementById("Output_vegetasjonfas_inktransport_sum").value = Output_vegetasjonfas_inktransport_sum;
+}
+
+// Excel math-functions
+function PVIF(rate, nper) {
+	return Math.pow(1 + rate, nper);
+}
+
+function PMT(rate, nper, pv, fv, type) {
+	if (!fv) fv = 0;
+	if (!type) type = 0;
+
+	if (rate == 0) return -(pv + fv)/nper;
+		
+	var pvif = Math.pow(1 + rate, nper);
+	var pmt = rate / (pvif - 1) * -(pv * pvif + fv);
+
+	if (type == 1) {
+		pmt /= (1 + rate);
+	}
+
+	return pmt;
+}
+
+function IPMT(pv, pmt, rate, per) {
+	var tmp = Math.pow(1 + rate, per);
+	return 0 - (pv * tmp * rate + pmt * (tmp - 1));
+}
+
+function PPMT(rate, per, nper, pv, fv, type) {
+    if (per < 1 || (per >= nper + 1)) return null;
+	var pmt = PMT(rate, nper, pv, fv, type);
+    var ipmt = IPMT(pv, pmt, rate, per - 1);
+	return pmt - ipmt;
+}
+
+// Calculation method for filling out fields based on inputs
+function costCalculation() {	
+    // -- Forlenget Amorteringstid --
+    var Forlenget_amorteringstid_aar1 = document.getElementById("Forlenget_amorteringstid_aar1").value;
+    var Forlenget_amorteringstid_aar2 = document.getElementById("Forlenget_amorteringstid_aar2").value;
+
+    var Forlenget_amorteringstid_lonebelop1 = document.getElementById("Forlenget_amorteringstid_lonebelop1").value;
+    var Forlenget_amorteringstid_lonebelop2 = document.getElementById("Forlenget_amorteringstid_lonebelop2").value;
+
+    var Forlenget_amorteringstid_procent1 = document.getElementById("Forlenget_amorteringstid_procent1").value / 100;
+    var Forlenget_amorteringstid_procent2 = document.getElementById("Forlenget_amorteringstid_procent2").value / 100;
+
+	var Forlenget_amorteringstid_rentekost1 = Math.round(Forlenget_amorteringstid_lonebelop1 * Forlenget_amorteringstid_procent1);
+    var Forlenget_amorteringstid_rentekost2 = Math.round(Forlenget_amorteringstid_lonebelop2 * Forlenget_amorteringstid_procent2);
+    document.getElementById("Forlenget_amorteringstid_rentekost1").value = Forlenget_amorteringstid_rentekost1;
+    document.getElementById("Forlenget_amorteringstid_rentekost2").value = Forlenget_amorteringstid_rentekost2;
+
+	var Forlenget_amorteringstid_renteavdrag1 = Math.round(PPMT(Forlenget_amorteringstid_procent1, Forlenget_amorteringstid_aar1, Forlenget_amorteringstid_aar1, Forlenget_amorteringstid_lonebelop1, 0, 0));
+    var Forlenget_amorteringstid_renteavdrag2 = Math.round(PPMT(Forlenget_amorteringstid_procent2, Forlenget_amorteringstid_aar2, Forlenget_amorteringstid_aar2, Forlenget_amorteringstid_lonebelop2, 0, 0));
+    document.getElementById("Forlenget_amorteringstid_renteavdrag1").value = Forlenget_amorteringstid_renteavdrag1;
+    document.getElementById("Forlenget_amorteringstid_renteavdrag2").value = Forlenget_amorteringstid_renteavdrag2;
+
+	var Forlenget_amorteringstid_bedret_likviditet = document.getElementById("Forlenget_amorteringstid_renteavdrag1").value - document.getElementById("Forlenget_amorteringstid_renteavdrag2").value; 
+    document.getElementById("Forlenget_amorteringstid_bedret_likviditet").value = Forlenget_amorteringstid_bedret_likviditet;
+
+    // -- Besparelse Lånerente --
+    var Besparelse_lonerente_lonebelop = document.getElementById("Besparelse_lonerente_lonebelop").value;
+    var Besparelse_lonerente_procent = document.getElementById("Besparelse_lonerente_procent").value / 100;
+    var Besparelse_lonerente_resultat = Math.round(Besparelse_lonerente_lonebelop * Besparelse_lonerente_procent);
+    
+    document.getElementById("Besparelse_lonerente_resultat").value = Besparelse_lonerente_resultat;
+
+    // -- Bærekraftig bygning; attraktivitet som utleieobjekt --
+    // Anslag,  økte leieinntekter
+    var Anslag_okte_leieinntekter_leieinntekter = document.getElementById("Anslag_okte_leieinntekter_leieinntekter").value;
+    var Anslag_okte_leieinntekter_procent = (document.getElementById("Anslag_okte_leieinntekter_procent").value / 100);
+    var Anslag_okte_leieinntekter_resultat = Math.round(Anslag_okte_leieinntekter_leieinntekter * Anslag_okte_leieinntekter_procent);
+
+    document.getElementById("Anslag_okte_leieinntekter_resultat").value = Anslag_okte_leieinntekter_resultat;
+
+    // Overvannshåndteringssystem
+    var Overvannshandteringssystem_fullverdi_sum = document.getElementById("Overvannshandteringssystem_fullverdi_sum").value;
+    var Overvannshandteringssystem_forsikringspremie_procent = document.getElementById("Overvannshandteringssystem_forsikringspremie_procent").value / 100;
+    var Overvannshandteringssystem_forsikringspremie_delresultat = Math.round(Overvannshandteringssystem_fullverdi_sum*Overvannshandteringssystem_forsikringspremie_procent);
+
+    document.getElementById("Overvannshandteringssystem_forsikringspremie_delresultat").value = Overvannshandteringssystem_forsikringspremie_delresultat;
+
+    var Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent = document.getElementById("Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent").value / 100;
+    var Overvannshandteringssystem_forsikringspremie_besparelse = Math.round(Overvannshandteringssystem_forsikringspremie_diffforsikpremieiprocent * Overvannshandteringssystem_forsikringspremie_delresultat);
+
+    document.getElementById("Overvannshandteringssystem_forsikringspremie_besparelse").value = Overvannshandteringssystem_forsikringspremie_besparelse;
+	
+    // -- Bærekraftig bygning; fangst av klimagasser mv --
+    //Differensiert eiendomsskatt
+    var Differensiert_eiendomsskatt_skattegrunnlag = document.getElementById("Differensiert_eiendomsskatt_skattegrunnlag").value;
+	var Differensiert_eiendomsskatt_skattesatsprocent1 = document.getElementById("Differensiert_eiendomsskatt_skattesatsprocent1").value / 100;
+	var Differensiert_eiendomsskatt_skattesatsprocent2 = document.getElementById("Differensiert_eiendomsskatt_skattesatsprocent2").value / 100;	
+	
+	var Differensiert_eiendomsskatt_eiendomsskatt1 = Math.round(Differensiert_eiendomsskatt_skattegrunnlag * Differensiert_eiendomsskatt_skattesatsprocent1);
+	document.getElementById("Differensiert_eiendomsskatt_eiendomsskatt1").value = Differensiert_eiendomsskatt_eiendomsskatt1;
+	
+	var Differensiert_eiendomsskatt_eiendomsskatt2 = Math.round(Differensiert_eiendomsskatt_skattegrunnlag * Differensiert_eiendomsskatt_skattesatsprocent2);
+	document.getElementById("Differensiert_eiendomsskatt_eiendomsskatt2").value = Differensiert_eiendomsskatt_eiendomsskatt2;
+		
+	var Differensiert_eiendomsskatt_resultat = Differensiert_eiendomsskatt_eiendomsskatt1 - Differensiert_eiendomsskatt_eiendomsskatt2;
+	document.getElementById("Differensiert_eiendomsskatt_resultat").value = Differensiert_eiendomsskatt_resultat;
+	
+	//Årsgebyr for avløp, fordelt på spillvann og overvann
+	var Aarsgebyr_for_avlop_vann_kvmbruksareal = document.getElementById("Aarsgebyr_for_avlop_vann_kvmbruksareal").value;
+	var Aarsgebyr_for_avlop_vann_antattforbrukperkvm = document.getElementById("Aarsgebyr_for_avlop_vann_antattforbrukperkvm").value;
+	var Aarsgebyr_for_avlop_vann_prisforbrukperkvm = document.getElementById("Aarsgebyr_for_avlop_vann_prisforbrukperkvm").value;
+	
+	var Aarsgebyr_for_avlop_vann_sumgebyr = Math.round(Aarsgebyr_for_avlop_vann_kvmbruksareal * Aarsgebyr_for_avlop_vann_antattforbrukperkvm * Aarsgebyr_for_avlop_vann_prisforbrukperkvm);
+	document.getElementById("Aarsgebyr_for_avlop_vann_sumgebyr").value = Aarsgebyr_for_avlop_vann_sumgebyr;
+	
+	var Aarsgebyr_for_avlop_avlop_kvmbruksareal = document.getElementById("Aarsgebyr_for_avlop_avlop_kvmbruksareal").value;
+	var Aarsgebyr_for_avlop_avlop_antattforbrukperkvm = document.getElementById("Aarsgebyr_for_avlop_avlop_antattforbrukperkvm").value;
+	var Aarsgebyr_for_avlop_avlop_prisforbrukperkvm = document.getElementById("Aarsgebyr_for_avlop_avlop_prisforbrukperkvm").value;
+	
+	var Aarsgebyr_for_avlop_avlop_sumgebyr = Math.round(Aarsgebyr_for_avlop_avlop_kvmbruksareal * Aarsgebyr_for_avlop_avlop_antattforbrukperkvm * Aarsgebyr_for_avlop_avlop_prisforbrukperkvm);
+	document.getElementById("Aarsgebyr_for_avlop_avlop_sumgebyr").value = Aarsgebyr_for_avlop_avlop_sumgebyr;
+	
+	var Aarsgebyr_for_avlop_abonnementsgebyr = document.getElementById("Aarsgebyr_for_avlop_abonnementsgebyr").value;
+	
+	var Aarsgebyr_for_avlop_totaltvannogavlopsgebyr = Math.round(1.25 * (parseInt(Aarsgebyr_for_avlop_abonnementsgebyr) + parseInt(Aarsgebyr_for_avlop_vann_sumgebyr) + parseInt(Aarsgebyr_for_avlop_avlop_sumgebyr)));
+	document.getElementById("Aarsgebyr_for_avlop_totaltvannogavlopsgebyr").value = Aarsgebyr_for_avlop_totaltvannogavlopsgebyr;
+	
+	var Aarsgebyr_for_avlop_vannmaalergebyrperaar = document.getElementById("Aarsgebyr_for_avlop_vannmaalergebyrperaar").value;
+	
+	var Aarsgebyr_for_avlop_totalt = parseInt(Aarsgebyr_for_avlop_totaltvannogavlopsgebyr) + parseInt(Aarsgebyr_for_avlop_vannmaalergebyrperaar);
+	document.getElementById("Aarsgebyr_for_avlop_totalt").value = Aarsgebyr_for_avlop_totalt;
+	
+	//-- Sum driftsresultat-forbedringer --
+	var Sum_driftsresultat_forbedringer = parseInt(Besparelse_lonerente_resultat) + parseInt(Anslag_okte_leieinntekter_resultat) + parseInt(Overvannshandteringssystem_forsikringspremie_besparelse) + parseInt(Differensiert_eiendomsskatt_resultat);
+	document.getElementById("Sum_driftsresultat_forbedringer").value = Sum_driftsresultat_forbedringer;
+	
+	// -- Kostnader, vedlikehold/planteskjøtsel --
+	var Kostnader_vedlikehold_planteskjotsel = document.getElementById("Kostnader_vedlikehold_planteskjotsel").value;	
+	
+	// -- Forbedret driftsresultat før leiekostnader -- 
+	var Forbedret_driftsresultat_foer_leiekostnader = parseInt(Sum_driftsresultat_forbedringer) - parseInt(Kostnader_vedlikehold_planteskjotsel);
+	document.getElementById("Forbedret_driftsresultat_foer_leiekostnader").value = Forbedret_driftsresultat_foer_leiekostnader;
+	
+	// -- Langsiktig årlig leie av GROW UP!-anlegg --	
+	var Langsiktig_aarlig_leie_GROWUP_anlegg_aar = document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_aar").value;
+	var Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep = document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep").value;
+	var Langsiktig_aarlig_leie_GROWUP_anlegg_rente = document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_rente").value / 100;
+
+	var Langsiktig_aarlig_leie_GROWUP_anlegg_resultat = Math.round(PPMT(Langsiktig_aarlig_leie_GROWUP_anlegg_rente, Langsiktig_aarlig_leie_GROWUP_anlegg_aar, Langsiktig_aarlig_leie_GROWUP_anlegg_aar, Langsiktig_aarlig_leie_GROWUP_anlegg_investeringsbeloep, 0, 0));
+	document.getElementById("Langsiktig_aarlig_leie_GROWUP_anlegg_resultat").value = Langsiktig_aarlig_leie_GROWUP_anlegg_resultat;
+	
+	// -- Forbedret driftsresultat etter leiekostnader --
+	var Forbedret_driftsresultat_etter_leiekostnader = Math.round(parseInt(Forbedret_driftsresultat_foer_leiekostnader) + parseInt(Langsiktig_aarlig_leie_GROWUP_anlegg_resultat));
+	document.getElementById("Forbedret_driftsresultat_etter_leiekostnader").value = Forbedret_driftsresultat_etter_leiekostnader;
+	
+	// -- Differanse_amortering -- 
+	var Differanse_amortering = -1 * parseInt(Forlenget_amorteringstid_bedret_likviditet);
+	document.getElementById("Differanse_amortering").value = Differanse_amortering;
+	
+	// -- Sum resultat- og likviditetsforbedring (før skatt) --
+	var Sum_resultat_likviditetsforbedring_foer_skatt = parseInt(Differanse_amortering) + parseInt(Forbedret_driftsresultat_etter_leiekostnader);
+	document.getElementById("Sum_resultat_likviditetsforbedring_foer_skatt").value = Sum_resultat_likviditetsforbedring_foer_skatt;
+	
+	// -- "ESG"-effekt av ordinær markedsverdi --
+	var ESG_effekt_ordinaer_markedsverdi = document.getElementById("ESG_effekt_ordinaer_markedsverdi").value;
+	var ESG_effekt_ordinaer_markedsverdi_i_percent = document.getElementById("ESG_effekt_ordinaer_markedsverdi_i_percent").value / 100;
+	
+	var ESG_effekt_ordinaer_markedsverdi_resultat = ESG_effekt_ordinaer_markedsverdi * ESG_effekt_ordinaer_markedsverdi_i_percent;
+	document.getElementById("ESG_effekt_ordinaer_markedsverdi_resultat").value = ESG_effekt_ordinaer_markedsverdi_resultat;
+}
+
+// Calculation method for filling out fields based on inputs
+function weightCalculation() {
+	// Uten dyrke-kasser
+    var Input_vektkalk_egenvektoppsamling_utendyrke = document.getElementById("Input_vektkalk_egenvektoppsamling_utendyrke").value;
+    var Input_vektkalk_vann_utendyrke = document.getElementById("Input_vektkalk_vann_utendyrke").value;
+    var Input_vektkalk_antall_oppsamling_utendyrke = document.getElementById("Input_vektkalk_antall_oppsamling_utendyrke").value;
+    
+    var Output_vektkalk_sum_vekt_oppsamling_utendyrke = (parseFloat(Input_vektkalk_egenvektoppsamling_utendyrke) + parseFloat(Input_vektkalk_vann_utendyrke)) * parseFloat(Input_vektkalk_antall_oppsamling_utendyrke);
+    document.getElementById("Output_vektkalk_sum_vekt_oppsamling_utendyrke").value = Math.round(Output_vektkalk_sum_vekt_oppsamling_utendyrke);
+    
+    var Input_vektkalk_antall_litelokk_utendyrke = document.getElementById("Input_vektkalk_antall_litelokk_utendyrke").value;
+    var Input_vektkalk_egenvekt_litelokk_utendyrke = document.getElementById("Input_vektkalk_egenvekt_litelokk_utendyrke").value;
+    var Input_vektkalk_antall_stortlokk_utendyrke = document.getElementById("Input_vektkalk_antall_stortlokk_utendyrke").value;
+    var Input_vektkalk_egenvekt_stortlokk_utendyrke = document.getElementById("Input_vektkalk_egenvekt_stortlokk_utendyrke").value;
+    
+    var Output_vektkalk_sum_vekt_lokk_utendyrke = (parseFloat(Input_vektkalk_antall_litelokk_utendyrke) * parseFloat(Input_vektkalk_egenvekt_litelokk_utendyrke)) + (parseFloat(Input_vektkalk_antall_stortlokk_utendyrke) * parseFloat(Input_vektkalk_egenvekt_stortlokk_utendyrke));
+    document.getElementById("Output_vektkalk_sum_vekt_lokk_utendyrke").value = Math.round(Output_vektkalk_sum_vekt_lokk_utendyrke);
+	
+    var Output_vektkalk_total_vekt_ink_lokk_utendyrke = parseFloat(Output_vektkalk_sum_vekt_oppsamling_utendyrke) + parseFloat(Output_vektkalk_sum_vekt_lokk_utendyrke);
+    document.getElementById("Output_vektkalk_total_vekt_ink_lokk_utendyrke").value = Math.round(Output_vektkalk_total_vekt_ink_lokk_utendyrke);
+	
+	// Med dyrke-kasser
+	var Input_vektkalk_vann_meddyrke = document.getElementById("Input_vektkalk_vann_meddyrke").value;
+    var Input_vektkalk_vaatjord_meddyrke = document.getElementById("Input_vektkalk_vaatjord_meddyrke").value;
+    var Input_vektkalk_egenvektoppsamling_meddyrke = document.getElementById("Input_vektkalk_egenvektoppsamling_meddyrke").value;
+    var Input_vektkalk_egenvekt_dyrkekasse_meddyrke = document.getElementById("Input_vektkalk_egenvekt_dyrkekasse_meddyrke").value;
+    var Input_vektkalk_anslag_vekt_planter_meddyrke = document.getElementById("Input_vektkalk_anslag_vekt_planter_meddyrke").value;
+    
+    var Output_vektkalk_total_vekt_ink_vegetasjon_meddyrke = (parseFloat(Input_vektkalk_vann_meddyrke) + parseFloat(Input_vektkalk_vaatjord_meddyrke) + parseFloat(Input_vektkalk_egenvektoppsamling_meddyrke) + parseFloat(Input_vektkalk_egenvekt_dyrkekasse_meddyrke) + parseFloat(Input_vektkalk_anslag_vekt_planter_meddyrke));
+    document.getElementById("Output_vektkalk_total_vekt_ink_vegetasjon_meddyrke").value = Math.round(Output_vektkalk_total_vekt_ink_vegetasjon_meddyrke);
+    
+    var Input_vektkalk_antall_litelokk_meddyrke = document.getElementById("Input_vektkalk_antall_litelokk_meddyrke").value;
+    var Input_vektkalk_egenvekt_litelokk_meddyrke = document.getElementById("Input_vektkalk_egenvekt_litelokk_meddyrke").value;
+    var Input_vektkalk_antall_stortlokk_meddyrke = document.getElementById("Input_vektkalk_antall_stortlokk_meddyrke").value;
+    var Input_vektkalk_egenvekt_stortlokk_meddyrke = document.getElementById("Input_vektkalk_egenvekt_stortlokk_meddyrke").value;
+    
+    var Output_vektkalk_sum_vekt_lokk_meddyrke = (parseFloat(Input_vektkalk_antall_litelokk_meddyrke) * parseFloat(Input_vektkalk_egenvekt_litelokk_meddyrke)) + (parseFloat(Input_vektkalk_antall_stortlokk_meddyrke) * parseFloat(Input_vektkalk_egenvekt_stortlokk_meddyrke));;
+    document.getElementById("Output_vektkalk_sum_vekt_lokk_meddyrke").value = Math.round(Output_vektkalk_sum_vekt_lokk_meddyrke);
+    
+    var Input_vektkalk_antall_dyrkekasser_meddyrke = document.getElementById("Input_vektkalk_antall_dyrkekasser_meddyrke").value;
+    var Input_vektkalk_antall_oppsamling_meddyrke = document.getElementById("Input_vektkalk_antall_oppsamling_meddyrke").value;
+    
+    var Output_vektkalk_sum_vekt_dyrkekasse_meddyrke = (parseFloat(Input_vektkalk_antall_dyrkekasser_meddyrke) * (parseFloat(Input_vektkalk_vaatjord_meddyrke) +  parseFloat(Input_vektkalk_egenvekt_dyrkekasse_meddyrke))) + (parseFloat(Input_vektkalk_antall_dyrkekasser_meddyrke) * parseFloat(Input_vektkalk_anslag_vekt_planter_meddyrke));
+    document.getElementById("Output_vektkalk_sum_vekt_dyrkekasse_meddyrke").value = Math.round(Output_vektkalk_sum_vekt_dyrkekasse_meddyrke);
+    
+    var Output_vektkalk_sum_vekt_oppsamling_meddyrke = Output_vektkalk_sum_vekt_lokk_meddyrke + (parseFloat(Input_vektkalk_antall_oppsamling_meddyrke) * (parseFloat(Input_vektkalk_vann_meddyrke) + parseFloat(Input_vektkalk_egenvektoppsamling_meddyrke)));
+    document.getElementById("Output_vektkalk_sum_vekt_oppsamling_meddyrke").value = Math.round(Output_vektkalk_sum_vekt_oppsamling_meddyrke);
+		
+	// Fasade
+	var Input_vektkalk_vannperakvedukt = document.getElementById("Input_vektkalk_vannperakvedukt").value;
+	var Input_vektkalk_vaatjordkgperplantekasse = document.getElementById("Input_vektkalk_vaatjordkgperplantekasse").value;
+	var Input_vektkalk_egenvektplatekasse = document.getElementById("Input_vektkalk_egenvektplatekasse").value;
+	var Input_vektkalk_egenvektakvedukt = document.getElementById("Input_vektkalk_egenvektakvedukt").value;
+	var Input_vektkalk_egenvektaludeksel = document.getElementById("Input_vektkalk_egenvektaludeksel").value;
+	
+	var Output_vektkalk_totalvektinkvegetasjon = parseInt(Input_vektkalk_vannperakvedukt) + parseInt(Input_vektkalk_vaatjordkgperplantekasse) + parseInt(Input_vektkalk_egenvektplatekasse) + parseInt(Input_vektkalk_egenvektakvedukt) + parseInt(Input_vektkalk_egenvektaludeksel);
+	document.getElementById("Output_vektkalk_totalvektinkvegetasjon").value = Output_vektkalk_totalvektinkvegetasjon;
+	
+	var Input_vektkalk_antallakveduktplantekasserfraovervann = document.getElementById("Input_vektkalk_antallakveduktplantekasserfraovervann").value;
+		
+	var Output_vektkalk_sumvekt = Math.round(Input_vektkalk_antallakveduktplantekasserfraovervann * Output_vektkalk_totalvektinkvegetasjon);
+	document.getElementById("Output_vektkalk_sumvekt").value = Output_vektkalk_sumvekt;
+}
+	
+</script>
