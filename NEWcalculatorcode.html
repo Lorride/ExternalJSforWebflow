@@ -323,6 +323,13 @@ function doCalculationOnClick() {
     // Calculate
     simpleCalculation();	
 }
+
+//Ny kalkulator variables:	
+var Input_tilbud_res_resantall = 0.0;
+var Input_tilbud_res_storelokkantall = 0.0;
+	
+var Input_tilbud_fas_platekassevannreantal = 0.0;
+var Input_vegetasjonfas_antall = 0.0;
 	
 // Calculation method for filling out fields based on inputs
 function simpleCalculation() {	
@@ -374,53 +381,55 @@ function simpleCalculation() {
 	document.getElementById("AntallEcoDrainReservoar").innerHTML = Math.round(Antall_oppsam_res) + "x ECODRAIN-reservoar";
 	
 	// Add result to other calculators input fields:
-	document.getElementById("Input_tilbud_res_resantall").value = Math.round(Antall_oppsam_res);
-	document.getElementById("Input_tilbud_res_storelokkantall").value = Math.round(Antall_oppsam_res);
+	var Input_tilbud_res_resantall = Math.round(Antall_oppsam_res);
+	var Input_tilbud_res_storelokkantall = Math.round(Antall_oppsam_res);
 	
-	document.getElementById("Input_tilbud_fas_platekassevannreantall").value = Math.round(Behov_antall_akvedukt);
-	document.getElementById("Input_vegetasjonfas_antall").value = Math.round(Behov_antall_akvedukt);
+	var Input_tilbud_fas_platekassevannreantal = Math.round(Behov_antall_akvedukt);
+	var Input_vegetasjonfas_antall = Math.round(Behov_antall_akvedukt);
 	
 	rainCostCalculation();
 }
 	
 function rainCostCalculation() {
-	// Reservoir
-	var Input_tilbud_res_resantall = document.getElementById("Input_tilbud_res_resantall").value;
-	var Input_tilbud_res_priseksmva = document.getElementById("Input_tilbud_res_priseksmva").value;
+	// Reservoir	    
+	var Input_tilbud_res_priseksmva = 1294.0;
 	
 	var Input_tilbud_res_delsum = Math.round(parseInt(Input_tilbud_res_resantall) * parseInt(Input_tilbud_res_priseksmva));
-	document.getElementById("Input_tilbud_res_delsum").value = Input_tilbud_res_delsum;
-
-	var Input_tilbud_res_storelokkantall = document.getElementById("Input_tilbud_res_storelokkantall").value;
-	var Input_tilbud_res_storelokkpriseksmva = document.getElementById("Input_tilbud_res_storelokkpriseksmva").value;
+	//document.getElementById("Input_tilbud_res_delsum").value = Input_tilbud_res_delsum;
+            
+	var Input_tilbud_res_storelokkpriseksmva = 844.0;
 	
 	var Input_tilbud_res_storelokkdelsum = Math.round(parseInt(Input_tilbud_res_storelokkantall) * parseInt(Input_tilbud_res_storelokkpriseksmva));
-	document.getElementById("Input_tilbud_res_storelokkdelsum").value = Input_tilbud_res_storelokkdelsum;
+	//document.getElementById("Input_tilbud_res_storelokkdelsum").value = Input_tilbud_res_storelokkdelsum;
 	
-	var Input_tilbud_res_dyrkekasseantall = document.getElementById("Input_tilbud_res_dyrkekasseantall").value;
-	var Input_tilbud_res_dyrkekassepriseksmva = document.getElementById("Input_tilbud_res_dyrkekassepriseksmva").value;
+	//var Input_tilbud_res_dyrkekasseantall = document.getElementById("Input_tilbud_res_dyrkekasseantall").value;
+	//var Input_tilbud_res_dyrkekassepriseksmva = document.getElementById("Input_tilbud_res_dyrkekassepriseksmva").value;
 	
-	var Input_tilbud_res_dyrkekassedelsum = Math.round(parseInt(Input_tilbud_res_dyrkekasseantall) * parseInt(Input_tilbud_res_dyrkekassepriseksmva));
-	document.getElementById("Input_tilbud_res_dyrkekassedelsum").value = Input_tilbud_res_dyrkekassedelsum;
+	//var Input_tilbud_res_dyrkekassedelsum = Math.round(parseInt(Input_tilbud_res_dyrkekasseantall) * parseInt(Input_tilbud_res_dyrkekassepriseksmva));
+	//document.getElementById("Input_tilbud_res_dyrkekassedelsum").value = Input_tilbud_res_dyrkekassedelsum;
 	
-	var Input_tilbud_res_smaalokkantall = document.getElementById("Input_tilbud_res_smaalokkantall").value;
-	var Input_tilbud_res_smaalokkpriseksmva = document.getElementById("Input_tilbud_res_smaalokkpriseksmva").value;
+	//var Input_tilbud_res_smaalokkantall = document.getElementById("Input_tilbud_res_smaalokkantall").value;
+	//var Input_tilbud_res_smaalokkpriseksmva = document.getElementById("Input_tilbud_res_smaalokkpriseksmva").value;
 	
-	var Input_tilbud_res_smaalokkdelsum = Math.round(parseInt(Input_tilbud_res_smaalokkantall) * parseInt(Input_tilbud_res_smaalokkpriseksmva));
-	document.getElementById("Input_tilbud_res_smaalokkdelsum").value = Input_tilbud_res_smaalokkdelsum;
+	//var Input_tilbud_res_smaalokkdelsum = Math.round(parseInt(Input_tilbud_res_smaalokkantall) * parseInt(Input_tilbud_res_smaalokkpriseksmva));
+	//document.getElementById("Input_tilbud_res_smaalokkdelsum").value = Input_tilbud_res_smaalokkdelsum;
 	
-	var Output_tilbud_res_summaterialkost = parseInt(Input_tilbud_res_delsum) + parseInt(Input_tilbud_res_storelokkdelsum) + parseInt(Input_tilbud_res_dyrkekassedelsum) + parseInt(Input_tilbud_res_smaalokkdelsum);
-	document.getElementById("Output_tilbud_res_summaterialkost").value = Output_tilbud_res_summaterialkost;
+	var Output_tilbud_res_summaterialkost = parseInt(Input_tilbud_res_delsum) + parseInt(Input_tilbud_res_storelokkdelsum);// + parseInt(Input_tilbud_res_dyrkekassedelsum) + parseInt(Input_tilbud_res_smaalokkdelsum);
+	//document.getElementById("Output_tilbud_res_summaterialkost").value = Output_tilbud_res_summaterialkost;
 	
-	var Input_tilbud_res_monteringprosent = (document.getElementById("Input_tilbud_res_monteringprosent").value / 100);
+	var Input_tilbud_res_monteringprosent = 25.0 / 100.0);
 	var Input_tilbud_res_monteringsum = Math.round(Input_tilbud_res_monteringprosent * Output_tilbud_res_summaterialkost);
-	document.getElementById("Input_tilbud_res_monteringsum").value = Input_tilbud_res_monteringsum;
+	//document.getElementById("Input_tilbud_res_monteringsum").value = Input_tilbud_res_monteringsum;
 	
 	//Sum reservoir
 	var Output_tilbud_res_sum = parseInt(Output_tilbud_res_summaterialkost) + parseInt(Input_tilbud_res_monteringsum);
-	document.getElementById("Output_tilbud_res_sum").value = Output_tilbud_res_sum;
+	//document.getElementById("Output_tilbud_res_sum").value = Output_tilbud_res_sum;
+
+	//Ny kalkulator element:
+	document.getElementById("EstimerteSamledeKostnader").value = "Kr" + Output_tilbud_res_sum;
 	
-	//Fasade	
+	//Ny kalkulator fjerne fasade kostnader
+	/*//Fasade	
 	var Input_tilbud_fas_platekassevannreantall = document.getElementById("Input_tilbud_fas_platekassevannreantall").value;
 	var Input_tilbud_fas_platekassevannrepriseksmva = document.getElementById("Input_tilbud_fas_platekassevannrepriseksmva").value;
 	
@@ -460,7 +469,7 @@ function rainCostCalculation() {
 	document.getElementById("Output_vegetasjonfas_sum").value = Output_vegetasjonfas_sum;
 	
 	var Output_vegetasjonfas_inktransport_sum = parseInt(Output_vegetasjonfas_sum) + parseInt(10850);
-	document.getElementById("Output_vegetasjonfas_inktransport_sum").value = Output_vegetasjonfas_inktransport_sum;
+	document.getElementById("Output_vegetasjonfas_inktransport_sum").value = Output_vegetasjonfas_inktransport_sum;*/
 }
 
 // Excel math-functions
