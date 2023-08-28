@@ -321,7 +321,6 @@ function setProcent_fasade1time() {
 
 function doCalculationOnClick() {
     // Calculate
-    alert("OnLoad");
     simpleCalculation();	
 }
 	
@@ -329,7 +328,7 @@ function doCalculationOnClick() {
 function simpleCalculation() {
 	alert("before calc");
 	// Calculation for rain
-	var Input_Tomt_Areal = parseFloat(300.0);
+	var Input_Tomt_Areal = 300.0;
 	var Input_oppsamlings_krav_1time = document.getElementById("Input_oppsamlings_krav_1time").value;
 	var Input_oppsamlings_krav_2time = document.getElementById("Input_oppsamlings_krav_2time").value;
 	var Oppsamlings_krav_1time = Input_Tomt_Areal * Input_oppsamlings_krav_1time;
