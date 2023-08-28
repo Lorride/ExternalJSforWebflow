@@ -1,5 +1,12 @@
 <script>
 
+//Nye kalkulator variabler:	
+var Input_tilbud_res_resantall = 0.0;
+var Input_tilbud_res_storelokkantall = 0.0;
+	
+var Input_tilbud_fas_platekassevannreantal = 0.0;
+var Input_vegetasjonfas_antall = 0.0;
+
 document.getElementById("ContactNowButton").addEventListener("click", doCalculationOnClick);	
 	
 // Global variables for cross calculation between each calculators output
@@ -323,13 +330,6 @@ function doCalculationOnClick() {
     // Calculate
     simpleCalculation();	
 }
-
-//Nye kalkulator variabler:	
-var Input_tilbud_res_resantall = 0.0;
-var Input_tilbud_res_storelokkantall = 0.0;
-	
-var Input_tilbud_fas_platekassevannreantal = 0.0;
-var Input_vegetasjonfas_antall = 0.0;
 	
 // Calculation method for filling out fields based on inputs
 function simpleCalculation() {	
