@@ -329,7 +329,7 @@ function simpleCalculation() {
 	document.getElementById("Output_oppsamlings_1time").value = Math.round(Oppsamlings_krav_1time);
 	document.getElementById("Output_oppsamlings_2time").value = Math.round(Oppsamlings_krav_2time);
 	// Ny kalkulator Element:
-	document.getElementById("OppsamlingsKrav").value = Math.round(Oppsamlings_krav_1time);
+	document.getElementById("OppsamlingsKrav").text = Math.round(Oppsamlings_krav_1time) + " L";
 	
 	var Input_pot_disp_per_sek_m2 = document.getElementById("Input_pot_disp_per_sek_m2").value / 1000;
 	var Liter_per_time_paaslipp = Input_Tomt_Areal * Input_pot_disp_per_sek_m2 * 3600;
