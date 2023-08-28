@@ -325,11 +325,12 @@ function doCalculationOnClick() {
 }
 	
 // Calculation method for filling out fields based on inputs
-function simpleCalculation() {
-	alert("before calc");
+function simpleCalculation() {	
 	// Calculation for rain
 	var Input_Tomt_Areal = 300.0;
+	alert("Before reading first input");
 	var Input_oppsamlings_krav_1time = document.getElementById("Input_oppsamlings_krav_1time").value;
+	alert("After reading first input");
 	var Input_oppsamlings_krav_2time = document.getElementById("Input_oppsamlings_krav_2time").value;
 	var Oppsamlings_krav_1time = Input_Tomt_Areal * Input_oppsamlings_krav_1time;
 	var Oppsamlings_krav_2time = Input_Tomt_Areal * Input_oppsamlings_krav_2time;
