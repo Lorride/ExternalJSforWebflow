@@ -372,7 +372,7 @@ function simpleCalculation() {
 	
 	// Add result to other calculators input fields:
 	document.getElementById("Input_tilbud_res_resantall").value = Math.round(Antall_oppsam_res);
-	document.getElementById("Input_tilbud_res_storelokkantall").value = 0;
+	//document.getElementById("Input_tilbud_res_storelokkantall").value = Math.round(Antall_oppsam_res);
 	
 	document.getElementById("Input_tilbud_fas_platekassevannreantall").value = Math.round(Behov_antall_akvedukt);
 	document.getElementById("Input_vegetasjonfas_antall").value = Math.round(Behov_antall_akvedukt);
@@ -394,13 +394,15 @@ function rainCostCalculation() {
 	var Input_tilbud_res_storelokkdelsum = Math.round(parseInt(Input_tilbud_res_storelokkantall) * parseInt(Input_tilbud_res_storelokkpriseksmva));
 	document.getElementById("Input_tilbud_res_storelokkdelsum").value = Input_tilbud_res_storelokkdelsum;
 	
-	var Input_tilbud_res_dyrkekasseantall = document.getElementById("Output_antall_oppsam_res").value * 2; //document.getElementById("Input_tilbud_res_dyrkekasseantall").value;
-	var Input_tilbud_res_dyrkekassepriseksmva = document.getElementById("Input_tilbud_res_dyrkekassepriseksmva").value;
-	
+	var Input_tilbud_res_dyrkekasseantall = Math.round(parseInt(Input_tilbud_res_resantall * 2));
+    document.getElementById("Input_tilbud_res_dyrkekasseantall").value = Input_tilbud_res_dyrkekasseantall;
+
+	var Input_tilbud_res_dyrkekassepriseksmva = document.getElementById("Input_tilbud_res_dyrkekassepriseksmva").value;	
 	var Input_tilbud_res_dyrkekassedelsum = Math.round(parseInt(Input_tilbud_res_dyrkekasseantall) * parseInt(Input_tilbud_res_dyrkekassepriseksmva));
 	document.getElementById("Input_tilbud_res_dyrkekassedelsum").value = Input_tilbud_res_dyrkekassedelsum;
 	
-	var Input_tilbud_res_smaalokkantall = document.getElementById("Output_antall_oppsam_res").value;
+	var Input_tilbud_res_smaalokkantall = Input_tilbud_res_resantall;
+    document.getElementById("Input_tilbud_res_smaalokkantall").value = Input_tilbud_res_smaalokkantall;
 	var Input_tilbud_res_smaalokkpriseksmva = document.getElementById("Input_tilbud_res_smaalokkpriseksmva").value;
 	
 	var Input_tilbud_res_smaalokkdelsum = Math.round(parseInt(Input_tilbud_res_smaalokkantall) * parseInt(Input_tilbud_res_smaalokkpriseksmva));
